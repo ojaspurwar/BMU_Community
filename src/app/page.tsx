@@ -10,6 +10,7 @@ import { NoticeStreamModule } from '@/components/NoticeStreamModule';
 import { ProfileModal } from '@/components/ProfileModal';
 import { EmergencyQuickDial } from '@/components/EmergencyQuickDial';
 import { GlobalSearchModal } from '@/components/GlobalSearchModal';
+import { TestRunModal } from '@/components/TestRunModal';
 import {
   Calendar,
   ShoppingBag,
@@ -21,6 +22,7 @@ import {
   CloudSun,
   Activity,
   Trophy,
+  FlaskConical,
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -39,6 +41,17 @@ export default function HomePage() {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
+  const [isTestModalOpen, setIsTestModalOpen] = useState(false);
+
+  // Check if test run notice has been shown this session
+  useEffect(() => {
+    try {
+      const seen = sessionStorage.getItem('bmu_test_notice_seen');
+      if (!seen) {
+        setIsTestModalOpen(true);
+      }
+    } catch (e) {}
+  }, []);
 
   // Live countdown to HackBMU 7.0 (Aug 22, 2026 09:00 AM)
   const [timeLeft, setTimeLeft] = useState({ days: 4, hours: 11, mins: 30, secs: 25 });
@@ -68,6 +81,7 @@ export default function HomePage() {
       <Navbar
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenEmergency={() => setIsEmergencyOpen(true)}
+        onOpenTestModal={() => setIsTestModalOpen(true)}
       />
 
       {/* Main Content Area - Fullscreen Desktop width */}
@@ -87,6 +101,14 @@ export default function HomePage() {
                 </span>
                 <span className="text-xs text-slate-500">•</span>
                 <span className="text-xs text-slate-400 font-medium">Sidhrawali Campus</span>
+                <span className="text-xs text-slate-500">•</span>
+                <button
+                  onClick={() => setIsTestModalOpen(true)}
+                  className="inline-flex items-center space-x-1 text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/15 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 transition-colors"
+                >
+                  <FlaskConical className="w-2.5 h-2.5 text-amber-400" />
+                  <span>Test Run</span>
+                </button>
               </div>
               <h1 className="text-lg sm:text-xl font-black text-white tracking-tight mt-0.5">
                 CampusPulse <span className="bg-gradient-to-r from-sky-400 via-emerald-400 to-rose-400 bg-clip-text text-transparent">BMU Operating System</span>
@@ -96,6 +118,18 @@ export default function HomePage() {
 
           {/* Countdown to HackBMU 7.0 & Telemetry */}
           <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
+            <button
+              onClick={() => setIsTestModalOpen(true)}
+              className="bg-amber-950/40 border border-amber-500/40 hover:border-amber-400/80 px-3 py-1.5 rounded-2xl flex items-center space-x-1.5 text-xs text-amber-200 transition-all shadow-inner"
+              title="Click to view Test Website notice & instructions"
+            >
+              <FlaskConical className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+              <span className="font-bold">Test Website</span>
+              <span className="text-[10px] bg-amber-500/20 text-amber-300 font-semibold px-1.5 py-0.2 rounded border border-amber-500/30">
+                Notice
+              </span>
+            </button>
+
             <div className="bg-slate-950/80 border border-red-500/30 px-3.5 py-2 rounded-2xl flex items-center space-x-3 shadow-inner">
               <div className="flex items-center space-x-1.5 text-xs text-rose-400 font-bold">
                 <Flame className="w-4 h-4 fill-rose-500/30 text-rose-400 animate-bounce" />
@@ -257,11 +291,20 @@ export default function HomePage() {
       <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <EmergencyQuickDial isOpen={isEmergencyOpen} onClose={() => setIsEmergencyOpen(false)} />
       <ProfileModal />
+      <TestRunModal
+        isOpen={isTestModalOpen}
+        onClose={() => {
+          setIsTestModalOpen(false);
+          try {
+            sessionStorage.setItem('bmu_test_notice_seen', 'true');
+          } catch (e) {}
+        }}
+      />
 
       {/* Footer */}
       <footer className="border-t border-slate-800/80 bg-slate-950/90 py-8 text-center text-xs text-slate-500">
         <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-8 xl:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 flex-wrap justify-center sm:justify-start">
             <div className="flex items-center space-x-1">
               <span className="h-2 w-2 rounded-full bg-blue-500" />
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
@@ -270,9 +313,21 @@ export default function HomePage() {
             <span className="font-bold text-slate-400">CampusPulse BMU OS</span>
             <span>•</span>
             <span>BML Munjal University, Sidhrawali, NH-48</span>
+            <span>•</span>
+            <button
+              onClick={() => setIsTestModalOpen(true)}
+              className="inline-flex items-center space-x-1 px-2 py-0.5 rounded bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 transition-colors"
+            >
+              <FlaskConical className="w-3 h-3 text-amber-400" />
+              <span>TEST RUN ENVIRONMENT</span>
+            </button>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-slate-400">
+            <button onClick={() => setIsTestModalOpen(true)} className="hover:text-amber-400 transition-colors flex items-center space-x-1">
+              <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
+              <span>Test Run Mode</span>
+            </button>
             <button onClick={() => setIsProfileModalOpen(true)} className="hover:text-sky-400 transition-colors">
               Student ID Card
             </button>

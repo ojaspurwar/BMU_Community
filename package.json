@@ -1,7 +1,24 @@
 {
-  "name": "campuspulse-bmu",
+  "name": "BMU_Community",
   "version": "0.1.0",
-  "private": true,
+  "description": "BMU Community (CampusPulse) - Real-time student operating system & campus telemetry hub for BML Munjal University",
+  "main": "server.cjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ojaspurwar/BMU_Community.git"
+  },
+  "keywords": [
+    "bmu",
+    "bml-munjal-university",
+    "campus-os",
+    "student-community",
+    "real-time",
+    "marketplace",
+    "events",
+    "sports-arena"
+  ],
+  "author": "Ojas Purwar",
+  "license": "MIT",
   "scripts": {
     "dev": "node server.cjs",
     "build": "node build-app.cjs",

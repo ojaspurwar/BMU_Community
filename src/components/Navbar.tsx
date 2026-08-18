@@ -32,14 +32,16 @@ import {
   ChevronRight,
   ShieldCheck,
   Zap,
+  FlaskConical,
 } from 'lucide-react';
 
 interface NavbarProps {
   onOpenSearch: () => void;
   onOpenEmergency: () => void;
+  onOpenTestModal?: () => void;
 }
 
-export function Navbar({ onOpenSearch, onOpenEmergency }: NavbarProps) {
+export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: NavbarProps) {
   const {
     currentUser,
     setCurrentUser,
@@ -141,6 +143,16 @@ export function Navbar({ onOpenSearch, onOpenEmergency }: NavbarProps) {
           </div>
 
           <div className="flex items-center space-x-2 shrink-0 ml-2">
+            {/* Test Run Mode Badge / Pop-up Trigger */}
+            <button
+              onClick={onOpenTestModal}
+              className="flex items-center space-x-1 font-extrabold bg-amber-500/20 hover:bg-amber-500/35 border border-amber-500/50 text-amber-300 hover:text-amber-100 px-2 py-0.5 rounded-lg text-[10px] sm:text-[11px] transition-all shadow-sm shadow-amber-500/10"
+              title="View Test Run Information & Instructions"
+            >
+              <FlaskConical className="w-3 h-3 text-amber-400 animate-pulse shrink-0" />
+              <span>Test Run</span>
+            </button>
+
             {/* Create Profile button (Desktop) */}
             <button
               onClick={() => setIsProfileModalOpen(true)}
@@ -197,6 +209,17 @@ export function Navbar({ onOpenSearch, onOpenEmergency }: NavbarProps) {
                   <span className="hidden xs:inline-block text-[9px] font-black uppercase px-1.5 py-0.2 rounded-full bg-gradient-to-r from-blue-600/30 to-emerald-600/30 text-sky-300 border border-sky-400/30">
                     OS
                   </span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (onOpenTestModal) onOpenTestModal();
+                    }}
+                    className="hidden sm:inline-flex items-center space-x-1 text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 transition-all shadow-sm shadow-amber-500/10 cursor-pointer"
+                    title="Click for Test Run details"
+                  >
+                    <FlaskConical className="w-2.5 h-2.5 text-amber-400 animate-pulse" />
+                    <span>Test Run</span>
+                  </button>
                 </div>
                 <div className="hidden sm:block text-[10px] text-slate-400 tracking-wide font-medium">
                   BML Munjal University
@@ -612,6 +635,17 @@ export function Navbar({ onOpenSearch, onOpenEmergency }: NavbarProps) {
                 <span>Profile</span>
               </button>
             </div>
+
+            <button
+              onClick={() => {
+                if (onOpenTestModal) onOpenTestModal();
+                setHamburgerOpen(false);
+              }}
+              className="w-full p-3 rounded-2xl bg-amber-950/40 border border-amber-500/40 text-amber-200 font-bold text-xs flex items-center justify-center space-x-2"
+            >
+              <FlaskConical className="w-4 h-4 text-amber-400 animate-pulse" />
+              <span>Test Website Mode & Instructions</span>
+            </button>
 
             <button
               onClick={() => {

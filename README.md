@@ -1,108 +1,196 @@
-# CampusPulse • BML Munjal University Operating System (BMU OS)
+# BMU_Community • CampusPulse OS
 
-> A unified, real-time campus operating system for student events & fests, peer skill & hardware trading, live study spot radar, and verified university announcements.
+> **A Unified Real-Time Campus Operating System & Community Hub for BML Munjal University (BMU)**  
+> *Consolidating Student Events, Peer Skill/Hardware Trade, Sports Arena Court Bookings, and Verified Academic Circulars into One Live Telemetry Grid.*
+
+[![Test Run Mode](https://img.shields.io/badge/Test_Run-Active_Sandbox-amber?style=for-the-badge&logo=flask)](https://github.com/ojaspurwar/BMU_Community)
+[![React](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)](LICENSE)
 
 ---
 
-## 🌟 Executive Overview & Hackathon Scope
+## 🧪 Test Run / Prototype Environment Notice
 
-**CampusPulse** solves the fragmented campus communication and collaboration experience across BML Munjal University (BMU). Instead of scattered WhatsApp groups, lost email circulars, and unstructured peer inquiries, CampusPulse consolidates four core real-time pillars into a cohesive, responsive web platform:
+> [!NOTE]
+> **This repository is configured in Test Run / Demo Mode for project submission and evaluation.**
+> - **Pre-Populated Mock Data:** Realistically seeded with BMU campus data (HackBMU 7.0 with ₹3L prize pool, Hostel Premier League matches, SOET hardware swaps, and CoE circulars).
+> - **Test Website Popup & Label:** When launched, a test run disclaimer highlights the evaluation environment. A `🧪 Test Run` badge is permanently available in the navigation bar to reopen test guidance at any time.
+> - **Multi-Student Personas:** Switch between verified accounts (*Aarav Sharma, Ananya Verma, Kabir Mehta, Priya Sundaram*) or create custom student identities.
+> - **Real-Time Multi-Tab Synchronization:** Open two browser tabs side-by-side to witness real-time cross-tab sync (RSVPs, court bookings, marketplace saves, notice acknowledgements).
+
+---
+
+## 🌟 Executive Overview & Problem Statement
+
+At **BML Munjal University**, student life is vibrant but fragmented across dozens of disconnected WhatsApp groups, lost email circulars, unstructured spreadsheets, and manual notices.
+
+**BMU_Community (CampusPulse)** solves this by unifying four fundamental campus pillars into a single, cohesive, cyber-aesthetic real-time web platform:
 
 ```
-                 ┌───────────────────────────────────────┐
-                 │        CampusPulse Dashboard         │
-                 └───────────────────┬───────────────────┘
-                                     │
-         ┌───────────────────────────┼───────────────────────────┐
-         ▼                           ▼                           ▼
-┌───────────────────┐       ┌───────────────────┐       ┌───────────────────┐
-│ Real-Time Events  │       │ Peer Skill & Gear │       │ Ad-Hoc Study Spot │
-│  & Fest Timetable │       │    Marketplace    │       │   Finder & Chat   │
-└───────────────────┘       └───────────────────┘       └───────────────────┘
-                                     │
-                                     ▼
-                        ┌─────────────────────────┐
-                        │ Verified Notice Stream  │
-                        │ (DSW, CoE, CDC Signed)  │
-                        └─────────────────────────┘
+                   ┌──────────────────────────────────────────┐
+                   │          BMU_Community Platform          │
+                   │        (Live Telemetry & Sync OS)        │
+                   └────────────────────┬─────────────────────┘
+                                        │
+         ┌──────────────────────────────┼──────────────────────────────┐
+         ▼                              ▼                              ▼
+┌──────────────────┐          ┌───────────────────┐          ┌───────────────────┐
+│ 1. Events & Fest │          │ 2. Peer Skill &   │          │ 3. Sports & Arena │
+│   Radar + QR Pass│          │    Gear Swap Hub  │          │    Court Booking  │
+└──────────────────┘          └───────────────────┘          └───────────────────┘
+                                        │
+                                        ▼
+                           ┌─────────────────────────┐
+                           │ 4. Verified Circulars   │
+                           │   (CoE, CDC, DSW Feeds) │
+                           └─────────────────────────┘
 ```
 
 ---
 
-## 🚀 Key Modules Built
+## 🚀 Key Modules & Capabilities
 
-### 1. Live Event & Fest Timetable
-- **Dynamic Scheduling:** HackBMU 7.0 (36-hr flagship), 67th Milestone Pro-Nites, GDSC AI Workshops, Box Cricket Tournaments, and SOET Executive Masterclasses.
-- **Category & Date Filters:** Instant classification (`Coding`, `Cultural`, `Workshops`, `Sports`, `Academic`, `Fest`).
-- **Live RSVP Sync:** Instant 1-click RSVP with real-time attendee counter updates synchronized across connected client tabs.
-- **Digital QR Gate Pass:** Generates verified BMU check-in passes for turnstiles and auditorium doors with print/save support.
-- **Calendar Integration:** Instant `.ics` calendar generator compatible with Google Calendar, Apple Calendar, and Outlook.
-- **Host / Propose Modal:** Allows student clubs (ACM, IEEE, Culrav, GDSC) to publish upcoming workshops with venue allocation.
+### 1. 🎟️ Live Event & Fest Radar
+- **Dynamic Scheduling:** HackBMU 7.0 countdown telemetry, Pro-Nites, GDSC AI workshops, and SOET hackathons.
+- **1-Click RSVP Sync:** Live synchronized attendee counters across all browser windows.
+- **Holographic QR Gate Pass:** Generates printable/saveable verified BMU check-in passes for turnstiles and auditorium entry.
+- **Calendar Generator:** Instant `.ics` file generation compatible with Google Calendar, Apple Calendar, and Outlook.
+- **Event Proposer:** Enables student clubs (ACM, Culrav, IEEE, Enactus) to propose campus workshops.
 
-### 2. Campus Peer Marketplace & Skill Trade
-- **Zero-Fee Peer Economy:** Eliminates middleman markups for textbooks, lab supplies, and dorm appliances.
-- **🔄 Dedicated Skill Swap Engine:** Matches students trading skills (e.g. *Advanced DSA & LeetCode prep ⇄ UI/UX Figma Design*, *Calculus III ⇄ Python Web Scraping*).
-- **BMU Course Hardware:** Listings for ESP32/Arduino microcontroller kits, sensor shields, and workshop boiler suits used in SOET labs.
-- **In-App Peer Chat Drawer:** Real-time simulated negotiation drawer with quick prompts (`"Meet at Library Ground Floor?"`, `"Is price negotiable?"`).
-- **Hostel Pickups:** Displays seller's hostel block (H1, H2, H3, H4, Tower A, Tower B, Tower C) and room numbers for safe campus handoffs.
+### 2. 🔄 Peer Skill & Gear Marketplace
+- **Zero-Commission Student Trade:** Buy, sell, borrow, or swap dorm electronics, books, and workshop gear.
+- **Dedicated Skill-Swap Matching:** Trade knowledge (e.g. *DSA & LeetCode prep ⇄ UI/UX Figma Design*).
+- **BMU Course Hardware:** Direct listings for Arduino/ESP32 kits, sensor packs, and SOET lab equipment.
+- **Simulated Chat Drawer:** In-app negotiation interface with preset campus pickup locations (Library Ground Floor, H1 Foyer, Café Nook).
 
-### 3. Live Campus Study Group & Room Radar
-- **Crowdsourced Telemetry Grid:** Live monitoring across 6 key BMU study zones:
-  - *Library Level 2 (Silent Sanctum)*
-  - *Library Level 1 (Collaborative Discussion Pods)*
-  - *Academic Block 2 Courtyard Pods*
-  - *Student Activity Centre (Cafeteria Nook & Lounge)*
-  - *Workshop Building Innovation Pod 304*
-  - *Radhakrishnan Hostel (H2) Study Lounge*
-- **Real-Time Sensor Indicators:** Noise Level (Silent, Low, Moderate, Lively), Power Outlets (Plentiful, Moderate, Scarce), Wi-Fi Speed (Mbps), Climate (Optimal, Chilled, Warm), and Occupancy %.
-- **1-Click Telemetry Reporting:** Enables any student to update live zone conditions with preset chips.
-- **Instant Ad-Hoc Study Pods:** 1-click feature to spin up temporary peer study rooms with:
-  - Synchronized **25-Minute Pomodoro Focus Timer** (Start / Pause / Reset).
-  - Built-in live group chat with peer participant roster.
-  - One-click shareable pod invitation link.
+### 3. 🏆 Sports & Arena Matrix
+- **Real-Time Court Booking:** Live reservation system for Badminton, Cricket Nets, Football Turf, and Table Tennis courts.
+- **Live Match Scoreboard:** Cheer for hostel teams (H1 Warriors vs. H3 Titans) with synchronized cheering counters.
+- **Squad Pickup Challenges:** Post open challenges when short on players (e.g. *"Need 2 players for 5v5 Turf Football at 7:30 PM"*).
 
-### 4. Verified Campus Notice Stream
-- **Actionable Circular Streams:** Filters spam into verified channels (`Exams & Academic`, `Placement & Internships`, `Club Recruitment`, `Hostel & Mess`, `Administrative & Shuttles`).
-- **Cryptographic Authority Seals:** Official badges from the *Office of the Controller of Examinations (CoE)*, *Career Development Centre (CDC)*, *Dean of Student Welfare (DSW)*, and *Hostel Warden Office*.
-- **Priority Escalation:** Urgent Red Alerts (Exam timetables, placement deadlines), Important Amber warnings, and General Blue updates.
-- **Actionable Attachments:** PDF syllabus/datesheet downloads and single-click *Acknowledge / Mark as Read* counters.
+### 4. 📢 Verified Campus Circular Stream
+- **Official Seals:** Verified cryptographic seals from Controller of Examinations (CoE), Career Development Centre (CDC), and Dean of Student Welfare (DSW).
+- **Priority Escalation:** Color-coded priority tags (Urgent Red, Important Amber, General Blue).
+- **Target Batch Filtering:** Instant filtering for B.Tech, MBA, Law, and School of Management.
+- **Interactive Acknowledgement:** Track unread circulars and acknowledge circulars with 1-click feedback.
+
+### 5. 🛡️ Campus Safety & Focus Tools
+- **24/7 SOS Helpline:** Instant quick-dial triggers for Campus Ambulance, Gate 1 Security, Hostel Wardens, and Student Counseling.
+- **Focus Soundscape Player:** Ambient lofi, café, and study tracks with built-in volume mixer.
+- **Interactive Campus Map & Telemetry:** Zone status, weather indicators, and AQI monitoring for Sidhrawali campus.
 
 ---
 
-## 🛠️ Architecture & Tech Stack
+## 🛠️ Tech Stack & Architecture
 
-| Layer | Technology |
+| Category | Technology |
 |---|---|
-| **Frontend Framework** | React 19, TypeScript |
-| **Styling & Design System** | Tailwind CSS with custom BMU Deep Navy (`#0B192C`) & Amber-Orange (`#FF6500`) theme tokens |
-| **Iconography & Polish** | Lucide Icons, Canvas Confetti particle engine |
-| **State & Real-Time Sync** | React Context + `BroadcastChannel` (`campuspulse_bmu_sync`) + LocalStorage persistence for true multi-tab real-time sync |
-| **Search Engine** | Global modal index search (Ctrl/Cmd + K shortcut) across events, items, pods, and circulars |
-| **Campus Safety** | Integrated 24/7 SOS Quick Dial (Campus Ambulance, Gate 1 Security, Warden, Counseling) |
+| **Repository Name** | `BMU_Community` |
+| **Frontend** | React 19, TypeScript |
+| **Styling & Theme** | Tailwind CSS (BMU Cyber Tri-color Palette: Emerald `#10b981`, Crimson `#ef4444`, Sapphire `#3b82f6`, Deep Slate `#06090e`) |
+| **Icons & Micro-Interactions** | Lucide React, Canvas-Confetti |
+| **Real-time Sync** | React Context + `BroadcastChannel` API (`campuspulse_bmu_sync`) + LocalStorage fallback |
+| **Build & Dev Server** | Custom zero-bundle Node server (`server.cjs`) powered by Sucrase + PostCSS + Tailwind |
 
 ---
 
-## 👥 Multi-Student Profile Switcher (Demo Mode)
+## 👥 Demo Student Profiles
 
-To experience real-time peer interactions, RSVPs, and marketplace listings, click the profile avatar in the top navigation bar to switch between verified student accounts:
-1. **Aarav Sharma** – 3rd Year B.Tech CSE (Radhakrishnan Hostel H2, ACM Tech Lead)
-2. **Ananya Verma** – 2nd Year B.Tech ECE (Tower C Girls Hostel, Robotics Core)
-3. **Kabir Mehta** – 1st Year MBA (Tower A Boys Hostel, Enactus Secretary)
-4. **Priya Sundaram** – 4th Year B.Tech AI & Data Science (Tower D, HackBMU Winner)
+The test run includes preloaded student personas for evaluation:
+
+| Student Name | Roll Number | Department | Hostel | Specialization / Role |
+|---|---|---|---|---|
+| **Aarav Sharma** | `220101048` | B.Tech CSE (3rd Year) | Hostel 1 (Boys) | ACM Tech Lead, Full-Stack Dev |
+| **Ananya Verma** | `230102015` | B.Tech ECE (2nd Year) | Hostel 2 (Girls) | Robotics Core & IoT Specialist |
+| **Kabir Mehta** | `240201009` | School of Management (MBA) | Hostel 3 (Boys) | Enactus Secretary & FinTech |
+| **Priya Sundaram** | `210101002` | B.Tech CSE (4th Year) | Hostel 6 (Girls) | HackBMU Champion & AI Researcher |
+
+*You can also click **"Create / Edit My Profile"** to create a custom student ID card!*
 
 ---
 
-## 🚦 How to Run Locally
+## 🚦 Quick Start Guide
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (version 18 or higher recommended)
+- `npm` (bundled with Node.js)
+
+### Installation & Execution
 
 ```bash
-# 1. Clone or navigate to the workspace
-cd "Project_Test2"
+# 1. Clone the repository
+git clone https://github.com/ojaspurwar/BMU_Community.git
 
-# 2. Start the local server
+# 2. Navigate to the project directory
+cd BMU_Community
+
+# 3. Install dependencies
+npm install
+
+# 4. Launch the development server
 npm run dev
-
-# 3. Open in your browser
-http://localhost:4040
 ```
 
-Open two browser tabs side-by-side to observe **instant real-time RSVP updates, marketplace listings, and study pod sync** across both windows!
+The application will start immediately at:
+👉 **`http://localhost:4040`**
+
+### Testing Multi-Tab Live Synchronization
+1. Open `http://localhost:4040` in **Tab A**.
+2. Open `http://localhost:4040` in **Tab B** (or in an incognito window).
+3. RSVP to an event or book a court slot in Tab A — watch Tab B update **instantly in real time**!
+
+---
+
+## 📂 Project Structure
+
+```
+BMU_Community/
+├── index.html                   # Entry HTML shell & dark theme bootstrapper
+├── package.json                 # Package metadata, scripts & dependencies
+├── server.cjs                   # Fast local development server with ESM transformation
+├── build-app.cjs                # Production CSS & asset compilation script
+├── tailwind.config.cjs          # Custom BMU tri-color palette tokens
+├── tsconfig.json                # TypeScript compiler configuration
+├── .gitignore                   # Clean repository exclusions
+├── README.md                    # Project documentation & test guide
+├── public/                      # Compiled CSS & static assets
+│   └── globals.css
+└── src/
+    ├── main.tsx                 # React DOM mount point
+    ├── app/
+    │   ├── globals.css          # Core CSS variables & utility classes
+    │   ├── layout.tsx           # Application layout wrapper
+    │   └── page.tsx             # Master dashboard with telemetry header
+    ├── components/
+    │   ├── Navbar.tsx           # Top navigation bar with test badge & profile switcher
+    │   ├── TestRunModal.tsx     # Test website notice & evaluation guide
+    │   ├── EventModule.tsx      # HackBMU timetable, RSVPs, and ticket pass
+    │   ├── EventPassModal.tsx   # Verified holographic QR gate pass modal
+    │   ├── MarketplaceModule.tsx# Peer goods & skill exchange engine
+    │   ├── MarketplaceChatDrawer.tsx # Simulated negotiation chat drawer
+    │   ├── SportsModule.tsx     # Turf booking & match cheer grid
+    │   ├── NoticeStreamModule.tsx # Verified circular stream & acknowledgements
+    │   ├── NoticeDetailModal.tsx# Circular viewer & PDF attachments
+    │   ├── ProfileModal.tsx     # Student ID card generator & editor
+    │   ├── EmergencyQuickDial.tsx # 24/7 SOS helpline modal
+    │   ├── GlobalSearchModal.tsx# ⌘K instant search engine
+    │   ├── StudyRadarModule.tsx # Campus zone telemetry & noise radar
+    │   └── StudyPodDrawer.tsx   # Ad-hoc Pomodoro study pods
+    ├── data/
+    │   └── mockData.ts          # Seed data for BMU campus entities
+    ├── lib/
+    │   ├── store.tsx            # Global state provider & BroadcastChannel sync
+    │   └── utils.ts             # Date formatters & helper utilities
+    └── types/
+        └── index.ts             # TypeScript interface definitions
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+Developed with ❤️ for the **BML Munjal University** student community.
