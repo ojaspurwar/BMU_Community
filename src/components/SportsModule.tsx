@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useCampusPulse } from '@/lib/store';
 import { SportsFacility, SportsMatch, SportsSquadChallenge, SportsCategory } from '@/types';
+import { openGoogleCalendar } from '@/lib/utils';
 import {
   Trophy,
   Activity,
@@ -26,6 +27,7 @@ import {
   Award,
   Sun,
   Moon,
+  CalendarPlus,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -735,12 +737,31 @@ export function SportsModule() {
                 <strong>{currentUser.name}</strong>.
               </p>
             </div>
-            <button
-              onClick={() => setBookingSuccessModal(null)}
-              className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/25"
-            >
-              Great, Got It
-            </button>
+            <div className="space-y-2 pt-1">
+              <button
+                onClick={() => {
+                  openGoogleCalendar({
+                    title: `${bookingSuccessModal.facilityName} Court Booking`,
+                    description: `Reserved sports court slot at BMU Sports Arena for ${currentUser.name} (${currentUser.rollNo}). Venue: ${bookingSuccessModal.facilityName}`,
+                    venue: `${bookingSuccessModal.facilityName}, Sports Complex, BML Munjal University, NH-48, Sidhrawali`,
+                    date: '2026-08-20',
+                    startTime: bookingSuccessModal.time.split(' - ')[0] || bookingSuccessModal.time,
+                    endTime: bookingSuccessModal.time.split(' - ')[1] || '08:00 PM',
+                  });
+                }}
+                className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-blue-600/25 flex items-center justify-center space-x-1.5 transition-all"
+              >
+                <CalendarPlus className="w-3.5 h-3.5" />
+                <span>Add Slot to Google Calendar</span>
+              </button>
+
+              <button
+                onClick={() => setBookingSuccessModal(null)}
+                className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl transition-colors"
+              >
+                Close / Done
+              </button>
+            </div>
           </div>
         </div>
       )}

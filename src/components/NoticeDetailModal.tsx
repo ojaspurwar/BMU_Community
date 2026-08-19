@@ -12,8 +12,9 @@ import {
   FileText,
   AlertTriangle,
   Building,
+  CalendarPlus,
 } from 'lucide-react';
-import { formatEventDate } from '@/lib/utils';
+import { formatEventDate, openGoogleCalendar } from '@/lib/utils';
 
 interface NoticeDetailModalProps {
   notice: CampusNotice | null;
@@ -156,24 +157,44 @@ export function NoticeDetailModal({
           )}
         </div>
 
-        {/* Footer with Acknowledgment Action */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between">
+        {/* Footer with Acknowledgment Action & Calendar Sync */}
+        <div className="p-4 border-t border-slate-800 bg-slate-950 flex flex-wrap items-center justify-between gap-3">
           <div className="text-xs text-slate-400">
             <strong className="text-slate-200">{notice.acknowledgements.length}</strong> BMU students
             have read and acknowledged this circular.
           </div>
 
-          <button
-            onClick={() => onAcknowledge(notice.id)}
-            className={`flex items-center space-x-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
-              isAcked
-                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
-                : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700'
-            }`}
-          >
-            <CheckCircle2 className="w-4 h-4" />
-            <span>{isAcked ? 'Acknowledged & Saved' : 'Mark as Read'}</span>
-          </button>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() =>
+                openGoogleCalendar({
+                  title: `BMU Circular: ${notice.title}`,
+                  description: `${notice.issuer} (${notice.issuerDesignation}):\n\n${notice.content}`,
+                  venue: `${notice.issuer}, BML Munjal University, NH-48, Sidhrawali`,
+                  date: '2026-08-24',
+                  startTime: '11:59 PM',
+                  endTime: '11:59 PM',
+                })
+              }
+              className="flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-blue-600/20 hover:bg-blue-600/30 text-sky-300 border border-blue-500/30 transition-all shadow-sm"
+              title="Add this circular deadline to Google Calendar"
+            >
+              <CalendarPlus className="w-3.5 h-3.5 text-sky-400" />
+              <span>Add to Google Calendar</span>
+            </button>
+
+            <button
+              onClick={() => onAcknowledge(notice.id)}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                isAcked
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700'
+              }`}
+            >
+              <CheckCircle2 className="w-4 h-4" />
+              <span>{isAcked ? 'Acknowledged & Saved' : 'Mark as Read'}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

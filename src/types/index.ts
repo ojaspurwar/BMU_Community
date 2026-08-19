@@ -211,3 +211,37 @@ export interface SportsSquadChallenge {
   skillLevel: 'All Levels Welcome' | 'Competitive' | 'Casual Knockabout';
   notes?: string;
 }
+
+// --- AI ASSISTANT (OPENROUTER ANYMODEL) TYPES ---
+export interface AIChatMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: string;
+  modelUsed?: string;
+  isError?: boolean;
+}
+
+export interface AIModelPreset {
+  id: string;
+  name: string;
+  provider: string;
+  badge: string;
+  description: string;
+  isCustom?: boolean;
+}
+
+// --- USER SCHEDULE & CALENDAR LIST TYPES ---
+export interface UserScheduleItem {
+  id: string;
+  title: string;
+  category: 'Event' | 'Sports' | 'Deadline' | 'Task';
+  date: string;
+  startTime: string;
+  endTime?: string;
+  venue?: string;
+  description?: string;
+  sourceId?: string;
+  completed?: boolean;
+}
+

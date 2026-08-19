@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { CampusEvent, UserProfile } from '@/types';
-import { QrCode, X, Calendar, MapPin, Clock, ShieldCheck, Download, Sparkles } from 'lucide-react';
+import { openGoogleCalendar } from '@/lib/utils';
+import { QrCode, X, Calendar, MapPin, Clock, ShieldCheck, Download, Sparkles, CalendarPlus } from 'lucide-react';
 
 interface EventPassModalProps {
   event: CampusEvent | null;
@@ -111,13 +112,30 @@ export function EventPassModal({ event, user, onClose }: EventPassModalProps) {
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between">
-          <span className="text-[11px] text-slate-400">Valid only with BMU Student ID</span>
+        <div className="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between gap-2">
+          <button
+            onClick={() =>
+              openGoogleCalendar({
+                title: event.title,
+                description: `BMU Entry Pass #${event.id.toUpperCase()}: ${event.description}`,
+                venue: event.venue,
+                date: event.date,
+                startTime: event.startTime,
+                endTime: event.endTime,
+              })
+            }
+            className="flex items-center space-x-1.5 bg-blue-600/30 hover:bg-blue-600/50 text-sky-200 border border-blue-500/40 px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-sm"
+            title="Add event to Google Calendar"
+          >
+            <CalendarPlus className="w-3.5 h-3.5 text-sky-400" />
+            <span>Google Calendar</span>
+          </button>
+
           <button
             onClick={() => window.print()}
             className="flex items-center space-x-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors"
           >
-            <Download className="w-3.5 h-3.5 text-sky-400" />
+            <Download className="w-3.5 h-3.5 text-slate-400" />
             <span>Save / Print</span>
           </button>
         </div>

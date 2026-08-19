@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
@@ -18,6 +19,7 @@ function resolvePkg(name) {
 
 const sucrase = resolvePkg('sucrase') || require('sucrase');
 let PORT = parseInt(process.env.PORT || '4040', 10);
+const DEFAULT_OPENROUTER_KEY = process.env.OPENROUTER_API_KEY || '';
 
 // Compile Tailwind on startup if tools are available
 async function compileCSS() {
@@ -119,6 +121,83 @@ const server = http.createServer(async (req, res) => {
   let reqUrl = req.url.split('?')[0];
 
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Title, HTTP-Referer');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    return res.end();
+  }
+
+  // --- OPENROUTER AI ASSISTANT PROXY ROUTE ---
+  if (reqUrl === '/api/ai/chat' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const payload = JSON.parse(body || '{}');
+        const apiKey = payload.apiKey || DEFAULT_OPENROUTER_KEY;
+        const model = payload.model || 'deepseek/deepseek-chat';
+        const messages = payload.messages || [];
+
+        if (!apiKey) {
+          res.writeHead(401, {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Access-Control-Allow-Origin': '*',
+          });
+          res.end(JSON.stringify({
+            error: {
+              message: 'No OpenRouter API Key configured. Please enter your OpenRouter API key in the AI Assistant settings (sk-or-v1-...) or configure OPENROUTER_API_KEY environment variable.'
+            }
+          }));
+          return;
+        }
+
+        const requestData = JSON.stringify({
+          model,
+          messages,
+        });
+
+        const openRouterReq = https.request({
+          hostname: 'openrouter.ai',
+          port: 443,
+          path: '/api/v1/chat/completions',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
+            'HTTP-Referer': 'http://localhost:4040',
+            'X-Title': 'CampusPulse BMU AI Assistant',
+            'Content-Length': Buffer.byteLength(requestData),
+          },
+          timeout: 30000,
+        }, (openRouterRes) => {
+          let resData = '';
+          openRouterRes.on('data', chunk => { resData += chunk; });
+          openRouterRes.on('end', () => {
+            res.writeHead(openRouterRes.statusCode || 200, {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+            });
+            res.end(resData);
+          });
+        });
+
+        openRouterReq.on('error', (err) => {
+          console.error('OpenRouter Proxy Error:', err.message);
+          res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ error: { message: `AI Gateway Connection Error: ${err.message}` } }));
+        });
+
+        openRouterReq.write(requestData);
+        openRouterReq.end();
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: { message: `Invalid Request Body: ${e.message}` } }));
+      }
+    });
+    return;
+  }
 
   if (reqUrl === '/' || reqUrl === '/index.html') {
     const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
@@ -164,7 +243,7 @@ const server = http.createServer(async (req, res) => {
       '.svg': 'image/svg+xml',
     };
     res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'text/plain' });
-    return res.end(fs.readFileSync(staticPath));
+    return fs.createReadStream(staticPath).pipe(res);
   }
 
   res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -178,15 +257,15 @@ function startServer(port) {
 │                   CampusPulse • BMU OS                      │
 │                                                             │
 │  🚀 Local Dev Server running at: http://localhost:${port}      │
-│  🏛️ Tailored for BML Munjal University (BMU)                │
-│  📡 Real-Time Multi-Tab Synchronized                        │
+│  🤖 OpenRouter AnyModel AI Proxy: Active (/api/ai/chat)     │
+│  🎨 Theme: BMU Cyber-Tricolor (Green • Red • Blue)          │
 └─────────────────────────────────────────────────────────────┘
     `);
   });
 
   server.on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
-      console.log(`Port ${port} in use, trying port ${port + 1}...`);
+      console.log(`Port ${port} in use, trying ${port + 1}...`);
       startServer(port + 1);
     } else {
       console.error('Server error:', err);
@@ -194,5 +273,9 @@ function startServer(port) {
   });
 }
 
-startServer(PORT);
-compileCSS();
+async function boot() {
+  await compileCSS();
+  startServer(PORT);
+}
+
+boot();

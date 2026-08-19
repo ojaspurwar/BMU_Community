@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useCampusPulse } from '@/lib/store';
 import { CampusEvent, EventCategory } from '@/types';
-import { generateICS, formatEventDate } from '@/lib/utils';
+import { generateICS, formatEventDate, openGoogleCalendar } from '@/lib/utils';
 import { EventPassModal } from './EventPassModal';
 import {
   Calendar,
@@ -37,7 +37,15 @@ const CATEGORIES: ('All' | EventCategory)[] = [
 ];
 
 export function EventModule() {
-  const { events, toggleRSVP, addEvent, currentUser, bookmarkedEvents, toggleBookmarkEvent } = useCampusPulse();
+  const {
+    events,
+    toggleRSVP,
+    addEvent,
+    currentUser,
+    bookmarkedEvents,
+    toggleBookmarkEvent,
+    setIsScheduleModalOpen,
+  } = useCampusPulse();
 
   const [selectedCategory, setSelectedCategory] = useState<'All' | EventCategory>('All');
   const [searchFilter, setSearchFilter] = useState('');
@@ -190,28 +198,49 @@ export function EventModule() {
                 </button>
               )}
 
-              <button
-                onClick={() =>
-                  generateICS({
-                    title: featuredEvent.title,
-                    description: featuredEvent.description,
-                    venue: featuredEvent.venue,
-                    date: featuredEvent.date,
-                    startTime: featuredEvent.startTime,
-                    endTime: featuredEvent.endTime,
-                  })
-                }
-                className="w-full flex items-center justify-center space-x-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-300 py-2.5 px-4 rounded-2xl text-xs font-semibold border border-slate-700/60 transition-colors"
-              >
-                <CalendarPlus className="w-3.5 h-3.5 text-slate-400" />
-                <span>Add to Calendar (.ics)</span>
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+                <button
+                  onClick={() =>
+                    openGoogleCalendar({
+                      title: featuredEvent.title,
+                      description: featuredEvent.description,
+                      venue: featuredEvent.venue,
+                      date: featuredEvent.date,
+                      startTime: featuredEvent.startTime,
+                      endTime: featuredEvent.endTime,
+                    })
+                  }
+                  className="w-full flex items-center justify-center space-x-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white py-2.5 px-3 rounded-2xl text-xs font-bold shadow-md shadow-blue-600/20 transition-all hover:scale-[1.02]"
+                  title="Add directly to Google Calendar in 1-click"
+                >
+                  <CalendarPlus className="w-4 h-4" />
+                  <span>Add to Google Calendar</span>
+                </button>
+
+                <button
+                  onClick={() =>
+                    generateICS({
+                      title: featuredEvent.title,
+                      description: featuredEvent.description,
+                      venue: featuredEvent.venue,
+                      date: featuredEvent.date,
+                      startTime: featuredEvent.startTime,
+                      endTime: featuredEvent.endTime,
+                    })
+                  }
+                  className="w-full flex items-center justify-center space-x-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-300 py-2.5 px-3 rounded-2xl text-xs font-semibold border border-slate-700/60 transition-colors"
+                  title="Download offline .ICS calendar file"
+                >
+                  <Download className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Download .ICS</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Control Bar: Filters, Search, Host Event Button */}
+      {/* Control Bar: Filters, Search, Host Event Button & Schedule List Sync */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80">
         {/* Category Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
@@ -230,8 +259,16 @@ export function EventModule() {
           ))}
         </div>
 
-        {/* Search & Host CTA */}
-        <div className="flex items-center gap-2.5">
+        {/* Search & Action Controls */}
+        <div className="flex items-center gap-2.5 flex-wrap md:flex-nowrap">
+          <button
+            onClick={() => setIsScheduleModalOpen(true)}
+            className="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-sky-300 border border-blue-500/40 text-xs font-bold transition-all shadow-sm"
+            title="Open My Campus Schedule & Google Calendar List"
+          >
+            <CalendarPlus className="w-3.5 h-3.5 text-sky-400" />
+            <span>My Schedule</span>
+          </button>
           <div className="relative flex-1 md:w-56">
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
@@ -376,22 +413,41 @@ export function EventModule() {
                   )}
                 </div>
 
-                <button
-                  onClick={() =>
-                    generateICS({
-                      title: event.title,
-                      description: event.description,
-                      venue: event.venue,
-                      date: event.date,
-                      startTime: event.startTime,
-                      endTime: event.endTime,
-                    })
-                  }
-                  className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors"
-                  title="Download .ICS for Calendar"
-                >
-                  <CalendarPlus className="w-4 h-4" />
-                </button>
+                <div className="flex items-center space-x-1.5">
+                  <button
+                    onClick={() =>
+                      openGoogleCalendar({
+                        title: event.title,
+                        description: event.description,
+                        venue: event.venue,
+                        date: event.date,
+                        startTime: event.startTime,
+                        endTime: event.endTime,
+                      })
+                    }
+                    className="p-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-sky-300 hover:text-white border border-blue-500/30 transition-all flex items-center space-x-1"
+                    title="Add directly to Google Calendar (1-Click)"
+                  >
+                    <CalendarPlus className="w-4 h-4 text-sky-400" />
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      generateICS({
+                        title: event.title,
+                        description: event.description,
+                        venue: event.venue,
+                        date: event.date,
+                        startTime: event.startTime,
+                        endTime: event.endTime,
+                      })
+                    }
+                    className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors"
+                    title="Download .ICS file"
+                  >
+                    <Download className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           );

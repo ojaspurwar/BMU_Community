@@ -1,9 +1,10 @@
 # BMU_Community • CampusPulse OS
 
 > **A Unified Real-Time Campus Operating System & Community Hub for BML Munjal University (BMU)**  
-> *Consolidating Student Events & Hackathons, Peer Skill/Hardware Trade, Sports Arena Court Bookings, Verified Academic Circulars, and Safety SOS into One Live Telemetry Grid.*
+> *Consolidating Student Events & Hackathons, Peer Skill/Hardware Trade, Sports Arena Court Bookings, Verified Academic Circulars, Safety SOS, and OpenRouter AnyModel AI Assistant into One Live Telemetry Grid.*
 
 [![Test Run Mode](https://img.shields.io/badge/Test_Run-Active_Sandbox-amber?style=for-the-badge&logo=flask)](https://github.com/ojaspurwar/BMU_Community)
+[![OpenRouter AnyModel AI](https://img.shields.io/badge/OpenRouter-AnyModel_AI-8a2be2?style=for-the-badge&logo=openai)](https://openrouter.ai/)
 [![React](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
@@ -17,6 +18,7 @@
 > **This repository is configured in Test Run / Demo Mode for project submission and evaluation.**
 > - **Pre-Populated Mock Data:** Realistically seeded with BMU campus data (HackBMU 7.0 with ₹3L prize pool, Hostel Premier League matches, SOET hardware swaps, court bookings, and verified CoE circulars).
 > - **Multi-Student Personas:** Switch between verified accounts (*Aarav Patel, Ishaan Verma, Kabir Mehta, Tanvi Agarwal*) or create custom student identities with the live holographic ID generator.
+> - **OpenRouter AnyModel AI Assistant:** Integrated with DeepSeek V3, GPT-4o Mini, Llama 3.3 70B, Claude 3.5 Sonnet, or custom OpenRouter model slugs.
 > - **Real-Time Multi-Tab Synchronization:** Open two browser tabs side-by-side to witness real-time cross-tab sync (RSVPs, court bookings, marketplace saves, match cheering, SOS alerts).
 
 ---
@@ -39,11 +41,19 @@ At **BML Munjal University (BMU)**, student life is dynamic but often fragmented
 │ 1. Events & Fest │          │ 2. Peer Skill &   │          │ 3. Sports & Arena │
 │   Radar + QR Pass│          │    Gear Swap Hub  │          │    Court Booking  │
 └──────────────────┘          └───────────────────┘          └───────────────────┘
+         │                              │                              │
+         └──────────────────────────────┼──────────────────────────────┘
                                         │
                                         ▼
                            ┌─────────────────────────┐
                            │ 4. Verified Circulars   │
                            │   (CoE, CDC, DSW Feeds) │
+                           └────────────┬────────────┘
+                                        │
+                                        ▼
+                           ┌─────────────────────────┐
+                           │ 5. BMU Pulse AI         │
+                           │ (OpenRouter AnyModel)   │
                            └─────────────────────────┘
 ```
 
@@ -57,11 +67,12 @@ At **BML Munjal University (BMU)**, student life is dynamic but often fragmented
 | **Language** | **TypeScript 5.7** | Strict type contracts across all models, data entities, and context actions |
 | **Styling Engine** | **Tailwind CSS 3.4** | Custom BMU Cyber-Tricolor design system, utility tokens, and animations |
 | **CSS Processors** | **PostCSS & Autoprefixer** | Cross-browser compatibility and optimized production stylesheets |
+| **AI Intelligence** | **OpenRouter API (AnyModel)** | Multi-LLM inference engine (DeepSeek V3, GPT-4o Mini, Llama 3.3 70B, Claude 3.5 Sonnet, custom slugs) |
 | **Icons** | **Lucide React (v0.475.0)** | Consistent, pixel-perfect iconography across all modules and navigation |
 | **Visual Effects** | **Canvas-Confetti (v1.9.4)** | Celebratory micro-animations for RSVPs, court bookings, and profile updates |
 | **State Management** | **React Context API** | Unified centralized state provider (`useCampusPulse`) for global application data |
 | **Multi-Tab Sync** | **BroadcastChannel API** | Real-time cross-tab synchronization (`campuspulse_bmu_sync`) with `localStorage` persistence |
-| **Development Server** | **Custom Node.js Server (`server.cjs`)** | Zero-bundle development server with on-the-fly Sucrase TSX transpilation & ESM module resolution |
+| **Development Server** | **Custom Node.js Server (`server.cjs`)** | Zero-bundle server with on-the-fly Sucrase TSX transpilation & `/api/ai/chat` proxy route |
 | **Audio Engine** | **HTML5 Web Audio API** | Focus soundscape generator with volume mixer and animated equalizer waveforms |
 
 ---
@@ -78,7 +89,19 @@ At **BML Munjal University (BMU)**, student life is dynamic but often fragmented
 
 ## 🚀 Detailed Features & Capabilities
 
-### 1. 🎟️ Events, Fests & HackBMU 7.0 Hub (Crimson Red Pillar)
+### 1. 🤖 BMU Pulse AI (OpenRouter AnyModel Engine)
+- **Multi-LLM Model Selector:** Switch on-the-fly between:
+  - ⚡ **DeepSeek V3** (`deepseek/deepseek-chat` - Ultra Fast & Technical)
+  - 🚀 **OpenAI GPT-4o Mini** (`openai/gpt-4o-mini` - Precision & Coding)
+  - 🦙 **Meta Llama 3.3 70B** (`meta-llama/llama-3.3-70b-instruct` - Open-Weight Powerhouse)
+  - 🔮 **Claude 3.5 Sonnet** (`anthropic/claude-3.5-sonnet` - Nuanced Writing)
+  - 🌟 **Google Gemini Flash 1.5** (`google/gemini-flash-1.5`)
+  - 🧪 **Custom AnyModel Slug** (enter any of OpenRouter's 300+ models!)
+- **Live Campus Context Injection:** Automatically injects BMU live telemetry, HackBMU 7.0 schedules, sports facility availability, peer marketplace items, and CoE circulars into system instructions.
+- **Interactive Chat Interface:** Markdown formatting, code syntax blocks, 1-click copy response, and conversation history controls.
+- **Floating Quick AI Action Button:** 1-click access from anywhere on the screen with real-time thinking status.
+
+### 2. 🎟️ Events, Fests & HackBMU 7.0 Hub (Crimson Red Pillar)
 - **Live HackBMU 7.0 Countdown Ticker:** Real-time countdown tracking days, hours, minutes, and seconds to BMU's flagship ₹3L hackathon.
 - **Category Filtering:** Filter campus happenings by *Coding*, *Cultural*, *Sports*, *Workshops*, *Academic*, and *Fest*.
 - **1-Click RSVP System:** Instant RSVP confirmation with synchronized attendee counters across all browser tabs and celebratory confetti.
@@ -86,13 +109,13 @@ At **BML Munjal University (BMU)**, student life is dynamic but often fragmented
 - **`.ics` Calendar File Export:** 1-click download of `.ics` calendar files compatible with Apple Calendar, Google Calendar, and Outlook.
 - **Event Proposal Modal:** Dedicated form for student councils and clubs (ACM, IEEE, Culrav, Enactus) to propose campus events.
 
-### 2. 🔄 Peer Skill & Dorm Gear Marketplace (Emerald Green Pillar)
+### 3. 🔄 Peer Skill & Dorm Gear Marketplace (Emerald Green Pillar)
 - **Zero-Commission Student Economy:** Buy, sell, borrow, or swap textbooks, dorm electronics, scientific calculators, and hardware kits.
 - **Interactive Peer Skill Matchmaker Engine:** Intelligent skill trade matching connecting skills offered (*React, LeetCode, UI/UX*) with skills requested (*Calculus, Embedded C, Python*).
 - **In-App Negotiation Chat Drawer:** Simulated real-time buyer-seller chat with instant auto-replies, suggested quick prompts, and deal status updates (*Available / Reserved / Completed*).
 - **Campus Safe Trade Zones:** Highlights verified public exchange points (*SAC Lounge, Central Library Ground Floor, Gate 1 Security*).
 
-### 3. 🏆 Sports & Athletics Arena Grid (Amber & Crimson Pillar)
+### 4. 🏆 Sports & Athletics Arena Grid (Amber & Crimson Pillar)
 - **Interactive Court & Arena Slot Booking:** Real-time slot booking for:
   - *BMU Indoor Badminton Complex (Courts 1–3)*
   - *Main Floodlit Football Turf & Athletics Arena*
@@ -104,21 +127,21 @@ At **BML Munjal University (BMU)**, student life is dynamic but often fragmented
 - **Inter-Hostel Premier League (HPL) & Sangram Scoreboard:** Live scores and commentary with interactive **Team Cheer / Fan Counters** (*Cheer Hostel 3 / Cheer Hostel 4*).
 - **Squad Finder & Match Challenger Board:** Post and join spontaneous pickup matches (*e.g., "Need 3 players for 8v8 turf match tonight"*) with 1-tap squad joining.
 
-### 4. 📢 Verified University Circulars & Deadlines Stream (Cyber Tricolor Pillar)
+### 5. 📢 Verified University Circulars & Deadlines Stream (Cyber Tricolor Pillar)
 - **Official Authenticated Circulars:** Circular stream from Controller of Examinations (CoE), Career Development Centre (CDC Placement), and Dean of Student Welfare (DSW).
 - **Color-Coded Priority Levels:** *🚨 Urgent*, *⚠️ Important*, and *📋 Standard* priority tags.
 - **Target Batch Filtering:** Instant filtering for B.Tech, MBA, Law, and School of Management.
 - **Downloadable Circular PDF Simulation:** Preview and download official authenticated guidelines directly from the modal.
 - **Unread Tracking & 1-Click Acknowledgement:** Track unread circular counts and record student reading acknowledgements in real time.
 
-### 5. 👤 Digital Student ID Card & Profile Creator
+### 6. 👤 Digital Student ID Card & Profile Creator
 - **Live Holographic ID Card Preview:** Displays student name, roll number, department badge, residence hostel room, reputation score, and verified BMU chip hologram.
 - **Avatar Preset Selector & Custom URL:** Choose from 6 stylish presets or provide any custom image URL.
 - **Comprehensive Profile Customizer:** Configure roll number, school/department, graduation cohort, hostel room, bio/tagline, and telegram/contact handle.
 - **Skills Tag Cloud:** Interactive tag manager to add and remove skills you can teach or trade.
 - **Multi-Persona Profile Switcher:** Switch between verified demo personas (*Aarav Patel, Ishaan Verma, Kabir Mehta, Tanvi Agarwal*) or create custom student identities.
 
-### 6. 🛡️ Campus Safety & Utility Tools
+### 7. 🛡️ Campus Safety & Utility Tools
 - **24/7 SOS Helpline & Broadcast Beacon:** Instant quick-dial triggers for Campus Ambulance, Gate 1 & 2 Security, Chief Warden, and Mental Health Wellness. Includes an emergency SOS broadcast beacon that synchronizes across all active student screens.
 - **Focus Audio Ambience Soundscape Player:** Integrated navbar audio generator with 4 ambient tracks (*Midnight Lo-Fi Beats*, *Aravalli Monsoon Rain*, *Library Whispers*, *SAC Coffee Lounge*), equalizer wave animations, and volume control.
 - **Live Weather & AQI Telemetry:** Real-time temperature ($28^\circ\text{C}$), weather conditions, and air quality index for the Sidhrawali campus.
@@ -169,7 +192,7 @@ The application will be live at:
 ### Testing Real-Time Multi-Tab Synchronization
 1. Open `http://localhost:4040` in **Tab A**.
 2. Open `http://localhost:4040` in **Tab B** (or an incognito window).
-3. RSVP to an event, book a court slot, cheer for a sports team, or trigger an SOS beacon in Tab A — observe Tab B update **instantly with zero refresh needed**!
+3. RSVP to an event, book a court slot, cheer for a sports team, or ask BMU Pulse AI a question — observe real-time synchronization across windows!
 
 ---
 
@@ -179,11 +202,12 @@ The application will be live at:
 BMU_Community/
 ├── index.html                   # HTML entry shell with Tricolor favicon & brand loader
 ├── package.json                 # Dependencies, scripts & project metadata
-├── server.cjs                   # Fast development server with dynamic Sucrase TSX transpiler
+├── server.cjs                   # Fast development server with /api/ai/chat proxy route & Sucrase
 ├── build-app.cjs                # PostCSS + Tailwind CSS compilation script
 ├── tailwind.config.cjs          # Custom BMU Cyber-Tricolor palette tokens
 ├── tsconfig.json                # TypeScript configuration
 ├── README.md                    # Comprehensive documentation & feature guide
+├── MVD.md                       # Master blueprint & backup document
 ├── public/                      # Static assets & compiled CSS
 │   └── globals.css
 └── src/
@@ -192,7 +216,8 @@ BMU_Community/
     │   ├── layout.tsx           # Base layout wrapper
     │   └── page.tsx             # Main dashboard with telemetry header & 4-pillar grid
     ├── components/
-    │   ├── Navbar.tsx           # Fullscreen navbar, audio soundscape player, SOS & profile menu
+    │   ├── Navbar.tsx           # Fullscreen navbar with Ask AI, audio player & profile menu
+    │   ├── AIAssistantModal.tsx # OpenRouter AnyModel AI assistant with model selector & context
     │   ├── EventModule.tsx      # HackBMU countdown, category filters, RSVP & ticket pass
     │   ├── EventPassModal.tsx   # Verified holographic QR gate pass modal
     │   ├── MarketplaceModule.tsx# Peer goods, skill trade matchmaker & safe markers
@@ -206,7 +231,7 @@ BMU_Community/
     ├── data/
     │   └── mockData.ts          # Seed data for BMU events, marketplace, sports & notices
     ├── lib/
-    │   ├── store.tsx            # Global state provider & BroadcastChannel sync engine
+    │   ├── store.tsx            # Global state provider with OpenRouter AI engine & sync
     │   └── utils.ts             # Date formatters, ICS generator & helpers
     └── types/
         └── index.ts             # TypeScript type definitions
@@ -216,6 +241,6 @@ BMU_Community/
 
 ## 📄 License
 
-This project is licensed under the **License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 Developed with ❤️ for the **BML Munjal University** student community.

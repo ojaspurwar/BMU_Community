@@ -33,6 +33,8 @@ import {
   ShieldCheck,
   Zap,
   FlaskConical,
+  Bot,
+  CalendarPlus,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -61,6 +63,10 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
     dismissSOSBeacon,
     campusWeather,
     setIsProfileModalOpen,
+    setIsAIAssistantOpen,
+    selectedAIModel,
+    setIsScheduleModalOpen,
+    getUserScheduleList,
   } = useCampusPulse();
 
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -143,15 +149,39 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
           </div>
 
           <div className="flex items-center space-x-2 shrink-0 ml-2">
-            {/* Test Run Mode Badge / Pop-up Trigger */}
+            {/* OpenRouter AI Assistant Trigger */}
             <button
-              onClick={onOpenTestModal}
-              className="flex items-center space-x-1 font-extrabold bg-amber-500/20 hover:bg-amber-500/35 border border-amber-500/50 text-amber-300 hover:text-amber-100 px-2 py-0.5 rounded-lg text-[10px] sm:text-[11px] transition-all shadow-sm shadow-amber-500/10"
-              title="View Test Run Information & Instructions"
+              onClick={() => setIsAIAssistantOpen(true)}
+              className="flex items-center space-x-1.5 bg-gradient-to-r from-blue-600/40 via-purple-600/40 to-pink-600/40 hover:from-blue-600/60 hover:to-pink-600/60 text-sky-200 border border-blue-400/40 px-2.5 py-0.5 rounded-lg text-[10px] sm:text-[11px] font-extrabold transition-all shadow-sm shadow-blue-500/10"
+              title="Open BMU Pulse AI (AnyModel OpenRouter Engine)"
             >
-              <FlaskConical className="w-3 h-3 text-amber-400 animate-pulse shrink-0" />
-              <span>Test Run</span>
+              <Bot className="w-3 h-3 text-sky-300 animate-bounce shrink-0" />
+              <span className="hidden xs:inline">BMU Pulse AI</span>
+              <span className="xs:hidden">AI</span>
             </button>
+
+            {/* My Campus Schedule & Google Calendar Quick Trigger */}
+            <button
+              onClick={() => setIsScheduleModalOpen(true)}
+              className="flex items-center space-x-1.5 bg-blue-600/30 hover:bg-blue-600/50 text-sky-200 border border-blue-500/40 px-2.5 py-0.5 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all shadow-sm"
+              title="Open My Campus Schedule & Google Calendar Sync"
+            >
+              <CalendarPlus className="w-3 h-3 text-sky-400 shrink-0" />
+              <span className="hidden xs:inline">My Schedule</span>
+              <span className="xs:hidden">Schedule</span>
+            </button>
+
+            {/* Test Run Mode Badge / Pop-up Trigger */}
+            {onOpenTestModal && (
+              <button
+                onClick={onOpenTestModal}
+                className="flex items-center space-x-1 font-extrabold bg-amber-500/20 hover:bg-amber-500/35 border border-amber-500/50 text-amber-300 hover:text-amber-100 px-2 py-0.5 rounded-lg text-[10px] sm:text-[11px] transition-all shadow-sm shadow-amber-500/10"
+                title="View Test Run Information & Instructions"
+              >
+                <FlaskConical className="w-3 h-3 text-amber-400 animate-pulse shrink-0" />
+                <span>Test Run</span>
+              </button>
+            )}
 
             {/* Create Profile button (Desktop) */}
             <button
@@ -209,17 +239,6 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
                   <span className="hidden xs:inline-block text-[9px] font-black uppercase px-1.5 py-0.2 rounded-full bg-gradient-to-r from-blue-600/30 to-emerald-600/30 text-sky-300 border border-sky-400/30">
                     OS
                   </span>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (onOpenTestModal) onOpenTestModal();
-                    }}
-                    className="hidden sm:inline-flex items-center space-x-1 text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 transition-all shadow-sm shadow-amber-500/10 cursor-pointer"
-                    title="Click for Test Run details"
-                  >
-                    <FlaskConical className="w-2.5 h-2.5 text-amber-400 animate-pulse" />
-                    <span>Test Run</span>
-                  </button>
                 </div>
                 <div className="hidden sm:block text-[10px] text-slate-400 tracking-wide font-medium">
                   BML Munjal University
@@ -294,6 +313,34 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
 
           {/* RIGHT: Quick Utility Controls */}
           <div className="flex items-center space-x-1.5 sm:space-x-2.5">
+            {/* Dedicated My Schedule & Google Calendar button */}
+            <button
+              onClick={() => setIsScheduleModalOpen(true)}
+              className="flex items-center space-x-1.5 p-2 sm:px-3 sm:py-2 rounded-2xl bg-blue-950/40 hover:bg-blue-900/50 border border-blue-500/40 text-sky-300 hover:text-white transition-all text-xs font-bold shadow-md shadow-blue-500/10"
+              title="My Campus Schedule & Google Calendar Integration"
+            >
+              <CalendarPlus className="w-4 h-4 text-sky-400 shrink-0" />
+              <span className="hidden md:inline">My Calendar</span>
+              {getUserScheduleList().length > 0 && (
+                <span className="text-[10px] bg-blue-500/30 text-sky-200 px-1.5 py-0.2 rounded-full font-mono font-black">
+                  {getUserScheduleList().length}
+                </span>
+              )}
+            </button>
+
+            {/* Dedicated AI Assistant Button */}
+            <button
+              onClick={() => setIsAIAssistantOpen(true)}
+              className="flex items-center space-x-1.5 p-2 sm:px-3 sm:py-2 rounded-2xl bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 hover:from-blue-600/30 hover:to-pink-600/30 border border-blue-500/40 text-sky-300 hover:text-white transition-all text-xs font-bold shadow-md shadow-blue-500/10"
+              title="Open BMU Pulse AI (AnyModel OpenRouter Engine)"
+            >
+              <Bot className="w-4 h-4 text-sky-400 animate-pulse shrink-0" />
+              <span className="hidden sm:inline">Ask AI</span>
+              <span className="hidden xl:inline text-[10px] bg-blue-500/20 text-sky-300 px-1.5 py-0.2 rounded border border-blue-400/30">
+                AnyModel
+              </span>
+            </button>
+
             {/* Focus Audio Ambience Popover Trigger */}
             <div className="relative">
               <button
@@ -306,7 +353,7 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
                 title="Focus Audio Ambience"
               >
                 <Headphones className={`w-4 h-4 shrink-0 ${isPlayingAudio ? 'text-sky-400 animate-pulse' : ''}`} />
-                <span className="hidden xl:inline max-w-[100px] truncate">
+                <span className="hidden xl:inline max-w-[90px] truncate">
                   {isPlayingAudio ? currentTrack.name.split(' ')[0] : 'Audio'}
                 </span>
                 {isPlayingAudio && (
@@ -515,6 +562,46 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
               </button>
             </div>
 
+            {/* AI Assistant Quick Trigger in Hamburger */}
+            <button
+              onClick={() => {
+                setIsAIAssistantOpen(true);
+                setHamburgerOpen(false);
+              }}
+              className="w-full p-3.5 rounded-2xl bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-pink-600/30 border border-blue-500/40 text-white flex items-center justify-between"
+            >
+              <div className="flex items-center space-x-2.5">
+                <Bot className="w-5 h-5 text-sky-400 animate-bounce" />
+                <div className="text-left">
+                  <div className="font-extrabold text-xs text-white">BMU Pulse AI (AnyModel)</div>
+                  <div className="text-[10px] text-slate-300">Ask campus questions with OpenRouter AI</div>
+                </div>
+              </div>
+              <span className="text-[10px] bg-blue-500/30 text-sky-200 px-2 py-0.5 rounded-full font-bold">
+                Open
+              </span>
+            </button>
+
+            {/* My Schedule & Google Calendar Quick Trigger in Hamburger */}
+            <button
+              onClick={() => {
+                setIsScheduleModalOpen(true);
+                setHamburgerOpen(false);
+              }}
+              className="w-full p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/60 via-indigo-950/60 to-slate-900 border border-blue-500/40 text-white flex items-center justify-between"
+            >
+              <div className="flex items-center space-x-2.5">
+                <CalendarPlus className="w-5 h-5 text-sky-400" />
+                <div className="text-left">
+                  <div className="font-extrabold text-xs text-white">My Schedule & Google Calendar</div>
+                  <div className="text-[10px] text-slate-300">1-click sync events, sports & deadlines</div>
+                </div>
+              </div>
+              <span className="text-[10px] bg-blue-500/30 text-sky-200 px-2 py-0.5 rounded-full font-bold font-mono">
+                {getUserScheduleList().length}
+              </span>
+            </button>
+
             {/* 4 Core Modules in Grid */}
             <div className="grid grid-cols-2 gap-2.5">
               {/* 1. Events */}
@@ -635,17 +722,6 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
                 <span>Profile</span>
               </button>
             </div>
-
-            <button
-              onClick={() => {
-                if (onOpenTestModal) onOpenTestModal();
-                setHamburgerOpen(false);
-              }}
-              className="w-full p-3 rounded-2xl bg-amber-950/40 border border-amber-500/40 text-amber-200 font-bold text-xs flex items-center justify-center space-x-2"
-            >
-              <FlaskConical className="w-4 h-4 text-amber-400 animate-pulse" />
-              <span>Test Website Mode & Instructions</span>
-            </button>
 
             <button
               onClick={() => {

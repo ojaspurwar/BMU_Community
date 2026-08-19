@@ -11,6 +11,8 @@ import { ProfileModal } from '@/components/ProfileModal';
 import { EmergencyQuickDial } from '@/components/EmergencyQuickDial';
 import { GlobalSearchModal } from '@/components/GlobalSearchModal';
 import { TestRunModal } from '@/components/TestRunModal';
+import { AIAssistantModal } from '@/components/AIAssistantModal';
+import { MyScheduleModal } from '@/components/MyScheduleModal';
 import {
   Calendar,
   ShoppingBag,
@@ -23,6 +25,8 @@ import {
   Activity,
   Trophy,
   FlaskConical,
+  Bot,
+  CalendarPlus,
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -37,6 +41,9 @@ export default function HomePage() {
     currentUser,
     campusWeather,
     setIsProfileModalOpen,
+    setIsAIAssistantOpen,
+    setIsScheduleModalOpen,
+    getUserScheduleList,
   } = useCampusPulse();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -118,6 +125,34 @@ export default function HomePage() {
 
           {/* Countdown to HackBMU 7.0 & Telemetry */}
           <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
+            {/* Ask AI quick pill */}
+            <button
+              onClick={() => setIsAIAssistantOpen(true)}
+              className="bg-gradient-to-r from-blue-900/50 via-purple-950/50 to-pink-950/50 border border-blue-500/40 hover:border-blue-400 px-3 py-1.5 rounded-2xl flex items-center space-x-1.5 text-xs text-sky-200 transition-all shadow-inner hover:scale-105"
+              title="Ask BMU Pulse AI (AnyModel OpenRouter Engine)"
+            >
+              <Bot className="w-3.5 h-3.5 text-sky-300 animate-bounce" />
+              <span className="font-bold">Ask AI</span>
+              <span className="text-[10px] bg-blue-500/20 text-sky-300 font-semibold px-1.5 py-0.2 rounded border border-blue-500/30">
+                AnyModel
+              </span>
+            </button>
+
+            {/* My Schedule & Calendar Quick Pill */}
+            <button
+              onClick={() => setIsScheduleModalOpen(true)}
+              className="bg-gradient-to-r from-blue-950/50 to-indigo-950/50 border border-blue-500/40 hover:border-blue-400 px-3 py-1.5 rounded-2xl flex items-center space-x-1.5 text-xs text-sky-200 transition-all shadow-inner hover:scale-105"
+              title="View My Campus Schedule & Google Calendar List"
+            >
+              <CalendarPlus className="w-3.5 h-3.5 text-sky-400" />
+              <span className="font-bold">My Calendar</span>
+              {getUserScheduleList().length > 0 && (
+                <span className="text-[10px] bg-blue-500/30 text-sky-300 font-semibold px-1.5 py-0.2 rounded border border-blue-400/30 font-mono">
+                  {getUserScheduleList().length}
+                </span>
+              )}
+            </button>
+
             <button
               onClick={() => setIsTestModalOpen(true)}
               className="bg-amber-950/40 border border-amber-500/40 hover:border-amber-400/80 px-3 py-1.5 rounded-2xl flex items-center space-x-1.5 text-xs text-amber-200 transition-all shadow-inner"
@@ -287,7 +322,28 @@ export default function HomePage() {
         </section>
       </main>
 
+      {/* Floating Quick AI Assistant Button */}
+      <button
+        onClick={() => setIsAIAssistantOpen(true)}
+        className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-30 flex items-center space-x-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white px-4 py-3 rounded-full shadow-2xl shadow-blue-600/40 border border-blue-400/40 hover:scale-105 transition-all group"
+        title="Ask BMU Pulse AI (AnyModel OpenRouter Engine)"
+      >
+        <div className="relative">
+          <Bot className="w-5 h-5 text-white animate-bounce" />
+          <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+          </span>
+        </div>
+        <span className="font-black text-xs tracking-tight">Ask AI</span>
+        <span className="hidden md:inline-block text-[10px] font-extrabold uppercase px-1.5 py-0.2 rounded-full bg-white/20 text-sky-200">
+          AnyModel
+        </span>
+      </button>
+
       {/* Global Modals & Drawers */}
+      <AIAssistantModal />
+      <MyScheduleModal />
       <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <EmergencyQuickDial isOpen={isEmergencyOpen} onClose={() => setIsEmergencyOpen(false)} />
       <ProfileModal />
@@ -324,6 +380,14 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-slate-400">
+            <button onClick={() => setIsScheduleModalOpen(true)} className="hover:text-sky-300 transition-colors flex items-center space-x-1 font-bold">
+              <CalendarPlus className="w-3.5 h-3.5 text-sky-400" />
+              <span>Google Calendar Sync</span>
+            </button>
+            <button onClick={() => setIsAIAssistantOpen(true)} className="hover:text-sky-300 transition-colors flex items-center space-x-1 font-bold">
+              <Bot className="w-3.5 h-3.5 text-sky-400" />
+              <span>BMU Pulse AI</span>
+            </button>
             <button onClick={() => setIsTestModalOpen(true)} className="hover:text-amber-400 transition-colors flex items-center space-x-1">
               <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
               <span>Test Run Mode</span>
