@@ -20,7 +20,7 @@ export interface UserProfile {
   sportsPlayed?: string[];
 }
 
-export type ActiveNavTab = 'events' | 'marketplace' | 'sports' | 'notices';
+export type ActiveNavTab = 'today' | 'events' | 'marketplace' | 'sports' | 'notices';
 
 export type EventCategory = 'Coding' | 'Cultural' | 'Sports' | 'Workshops' | 'Academic' | 'Fest';
 

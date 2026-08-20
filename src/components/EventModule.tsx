@@ -23,6 +23,7 @@ import {
   Bookmark,
   Ticket,
   ExternalLink,
+  Download,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -291,7 +292,7 @@ export function EventModule() {
       </div>
 
       {/* Events Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filteredEvents.map((event) => {
           const isRSVPed = event.rsvpUsers.includes(currentUser.id);
           const isBookmarked = bookmarkedEvents.includes(event.id);

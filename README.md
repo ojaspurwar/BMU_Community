@@ -5,10 +5,46 @@
 
 [![Test Run Mode](https://img.shields.io/badge/Test_Run-Active_Sandbox-amber?style=for-the-badge&logo=flask)](https://github.com/ojaspurwar/BMU_Community)
 [![OpenRouter AnyModel AI](https://img.shields.io/badge/OpenRouter-AnyModel_AI-8a2be2?style=for-the-badge&logo=openai)](https://openrouter.ai/)
+[![Google Calendar](https://img.shields.io/badge/Google_Calendar-1--Click_Sync-4285F4?style=for-the-badge&logo=googlecalendar)](https://calendar.google.com/)
 [![React](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)](LICENSE)
+
+---
+
+## 🎥 Platform Showcase Video & Live Walkthrough
+
+<div align="center">
+
+<!-- GitHub HTML5 Embedded Video Player -->
+<video src="videos/bmu-showcase/out.mp4" poster="videos/bmu-showcase/snapshots/frame-00-at-1.8s.png" width="100%" controls autoplay loop muted playsinline>
+  Your browser does not support the video tag. <a href="videos/bmu-showcase/out.mp4">Click here to view the showcase video</a>.
+</video>
+
+<br />
+
+<a href="videos/bmu-showcase/out.mp4" target="_blank">
+  <img src="videos/bmu-showcase/snapshots/contact-sheet.jpg" alt="BMU Community CampusPulse Video Showcase" width="100%" style="border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.12);" />
+</a>
+
+<br />
+
+**[▶️ Click to Watch Full 60s HD Video Showcase (out.mp4)](videos/bmu-showcase/out.mp4)** &nbsp;•&nbsp; **[📸 Browse High-Res Frame Snapshots](videos/bmu-showcase/snapshots/)** &nbsp;•&nbsp; **[🎬 Interactive Showcase Deck](videos/bmu-showcase/index.html)**
+
+</div>
+
+### 📸 Video Frame Highlights
+
+| 🏠 1. Live Telemetry & Weather | ⚡ 2. Events & Court Bookings |
+| :---: | :---: |
+| <img src="videos/bmu-showcase/snapshots/frame-00-at-1.8s.png" width="100%" alt="Live Telemetry Dashboard" /> | <img src="videos/bmu-showcase/snapshots/frame-01-at-5.6s.png" width="100%" alt="Events & Sports Arena" /> |
+| **Real-time online students, weather & AQI** | **HackBMU 7.0 RSVPs & Turf slot reservations** |
+
+| 🤝 3. Peer Skill & Hardware Trade | 🤖 4. BMU Pulse AI & CoE Circulars |
+| :---: | :---: |
+| <img src="videos/bmu-showcase/snapshots/frame-02-at-9.3s.png" width="100%" alt="Peer Marketplace" /> | <img src="videos/bmu-showcase/snapshots/frame-03-at-13.2s.png" width="100%" alt="BMU Pulse AI & Notices" /> |
+| **0-fee hardware swaps & DSA mentoring** | **OpenRouter AnyModel AI & Verified Circulars** |
 
 ---
 
@@ -19,6 +55,7 @@
 > - **Pre-Populated Mock Data:** Realistically seeded with BMU campus data (HackBMU 7.0 with ₹3L prize pool, Hostel Premier League matches, SOET hardware swaps, court bookings, and verified CoE circulars).
 > - **Multi-Student Personas:** Switch between verified accounts (*Aarav Patel, Ishaan Verma, Kabir Mehta, Tanvi Agarwal*) or create custom student identities with the live holographic ID generator.
 > - **OpenRouter AnyModel AI Assistant:** Integrated with DeepSeek V3, GPT-4o Mini, Llama 3.3 70B, Claude 3.5 Sonnet, or custom OpenRouter model slugs.
+> - **1-Click Google Calendar Sync:** Add events, sports arena slots, circular deadlines, and custom agenda items directly to Google Calendar.
 > - **Real-Time Multi-Tab Synchronization:** Open two browser tabs side-by-side to witness real-time cross-tab sync (RSVPs, court bookings, marketplace saves, match cheering, SOS alerts).
 
 ---
@@ -200,31 +237,37 @@ The application will be live at:
 
 ```
 BMU_Community/
-├── index.html                   # HTML entry shell with Tricolor favicon & brand loader
+├── index.html                   # HTML entry shell with Cyber-Tricolor favicon & brand loader
 ├── package.json                 # Dependencies, scripts & project metadata
 ├── server.cjs                   # Fast development server with /api/ai/chat proxy route & Sucrase
 ├── build-app.cjs                # PostCSS + Tailwind CSS compilation script
 ├── tailwind.config.cjs          # Custom BMU Cyber-Tricolor palette tokens
 ├── tsconfig.json                # TypeScript configuration
-├── README.md                    # Comprehensive documentation & feature guide
+├── README.md                    # Comprehensive documentation & video showcase guide
 ├── MVD.md                       # Master blueprint & backup document
+├── videos/                      # Platform showcase assets & video renders
+│   └── bmu-showcase/
+│       ├── out.mp4              # 60-second 1080p full platform video showcase
+│       ├── index.html           # Interactive GSAP HTML5 showcase deck
+│       └── snapshots/           # High-resolution keyframe snapshots & contact sheet
 ├── public/                      # Static assets & compiled CSS
 │   └── globals.css
 └── src/
     ├── app/
     │   ├── globals.css          # CSS custom variables, glow utilities & animations
     │   ├── layout.tsx           # Base layout wrapper
-    │   └── page.tsx             # Main dashboard with telemetry header & 4-pillar grid
+    │   └── page.tsx             # Main dashboard with telemetry header, Today tab & 4-pillar grid
     ├── components/
-    │   ├── Navbar.tsx           # Fullscreen navbar with Ask AI, audio player & profile menu
+    │   ├── Navbar.tsx           # Fullscreen navbar with Today tab, Ask AI, audio player & profile menu
     │   ├── AIAssistantModal.tsx # OpenRouter AnyModel AI assistant with model selector & context
+    │   ├── MyScheduleModal.tsx  # Personal schedule list with 1-click Google Calendar sync
     │   ├── EventModule.tsx      # HackBMU countdown, category filters, RSVP & ticket pass
-    │   ├── EventPassModal.tsx   # Verified holographic QR gate pass modal
+    │   ├── EventPassModal.tsx   # Verified holographic QR gate pass modal with Google Calendar
     │   ├── MarketplaceModule.tsx# Peer goods, skill trade matchmaker & safe markers
     │   ├── MarketplaceChatDrawer.tsx # In-app negotiation chat drawer
     │   ├── SportsModule.tsx     # Court booking, live HPL match scoreboard & squad challenges
     │   ├── NoticeStreamModule.tsx # Verified circular stream, batch filters & PDF viewer
-    │   ├── NoticeDetailModal.tsx# Official circular detail viewer & downloadable PDF
+    │   ├── NoticeDetailModal.tsx# Official circular detail viewer with Google Calendar deadline sync
     │   ├── ProfileModal.tsx     # Custom student ID card creator & skill tags editor
     │   ├── EmergencyQuickDial.tsx # 24/7 SOS helpline modal & campus broadcast beacon
     │   └── GlobalSearchModal.tsx# ⌘K instant search engine
@@ -232,7 +275,7 @@ BMU_Community/
     │   └── mockData.ts          # Seed data for BMU events, marketplace, sports & notices
     ├── lib/
     │   ├── store.tsx            # Global state provider with OpenRouter AI engine & sync
-    │   └── utils.ts             # Date formatters, ICS generator & helpers
+    │   └── utils.ts             # Google Calendar generator, date formatters, ICS generator & helpers
     └── types/
         └── index.ts             # TypeScript type definitions
 ```

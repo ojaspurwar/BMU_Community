@@ -268,7 +268,7 @@ export function SportsModule() {
           </div>
 
           {/* Facilities Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredFacilities.map((fac) => {
               const occPercent = Math.round((fac.currentOccupancy / fac.maxCapacity) * 100);
               let occColor = 'bg-emerald-500 text-emerald-400';

@@ -227,7 +227,7 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
     },
   ]);
   
-  const [activeTab, setActiveTab] = useState<ActiveNavTab>('events');
+  const [activeTab, setActiveTab] = useState<ActiveNavTab>('today');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Personal Schedule & Google Calendar list state

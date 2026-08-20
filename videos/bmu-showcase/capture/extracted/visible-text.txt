@@ -1,0 +1,203 @@
+[span] BMU Live
+[span] HackBMU 7.0 (₹3L Prize Pool) Active • Sports:
+[span] Match Live • Temp
+[span] °C (AQI
+[span] Schedule
+[span] Test Run
+[span] My Profile
+[span] SOS
+[span] BMU
+[span] CampusPulse
+[div] BML Munjal University
+[span] Events & Fests
+[span] Skill & Gear Swap
+[span] Sports & Arena
+[span] Circulars
+[span] My Calendar
+[span] Ask AI
+[span] AnyModel
+[span] Audio
+[span] Search
+[span] Aarav
+[span] Events
+[span] Market
+[span] Sports
+[span] Circulars
+[span] BMU Live Telemetry Grid
+[span] Sidhrawali Campus
+[span] Test Run
+[h1] CampusPulse
+[span] BMU Operating System
+[span] Ask AI
+[span] AnyModel
+[span] My Calendar
+[span] Test Website
+[span] Notice
+[span] HackBMU 7.0 in:
+[span] AQI
+[span] Good
+[span] Events & Fests
+[div] 1646
+[div] Confirmed RSVPs
+[span] Skill & Gear Swap
+[div] Skill Swaps Active
+[span] Sports & Arena Grid
+[div] Live Matches • Courts Open
+[span] Verified Circulars
+[div] Unread Notices
+[span] Campus Flagship Spotlight
+[span] Coding
+[span] Organized by
+[strong] ACM BMU Student Chapter & Culrav
+[h2] HackBMU 7.0: 36-Hour National Hackathon
+[p] BMUs flagship annual hackathon featuring tracks in AI Agents, Web3, GreenTech, and IoT. ₹3,00,000+ in cash prizes, sponsor bounties, and direct internship opportunities with top tier tech firms.
+[span] Sat, 22 Aug
+[span] 09:00 AM
+[span] Academic Block 2 - Main Auditorium & Labs
+[span] 342
+[span] Attending
+[span] You're Attending (Cancel)
+[span] View Digital QR Entry Pass
+[span] Add to Google Calendar
+[span] Download .ICS
+[button] All
+[button] Coding
+[button] Cultural
+[button] Workshops
+[button] Sports
+[button] Academic
+[button] Fest
+[span] My Schedule
+[span] Host Event
+[span] Coding
+[span] 500
+[span] cap
+[span] 158 left
+[h3] HackBMU 7.0: 36-Hour National Hackathon
+[span] ACM BMU Student Chapter & Culrav
+[p] BMUs flagship annual hackathon featuring tracks in AI Agents, Web3, GreenTech, and IoT. ₹3,00,000+ in cash prizes, sponsor bounties, and direct internship opportunities with top tier tech firms.
+[span] Keynote by VP Engineering, Google Cloud India
+[span] Sat, 22 Aug
+[span] 09:00 AM
+[span] Academic Block 2 - Main Auditorium & Labs
+[span] Hackathon
+[span] FullStack
+[span] Attending
+[span] 342
+[span] Cultural
+[span] 1200
+[span] cap
+[span] 516 left
+[h3] 67th Milestone Fest: Battle of the Bands & Pro-Nite
+[span] Culrav Cultural Council BMU
+[p] The premier annual cultural extravaganza of BML Munjal University! Featuring top indie rock university bands across North India, food street stalls, and celebrity headliner DJ set.
+[span] Headlining: Indian Ocean & Lost Stories
+[span] Fri, 28 Aug
+[span] 06:30 PM
+[span] Open Air Amphitheatre & Sports Ground
+[span] Music
+[span] Fest
+[span] ProNite
+[span] Attending
+[span] 684
+[span] Workshops
+[span] 120
+[span] cap
+[span] 2 left
+[h3] Hands-on Workshop: Building Generative AI Agents with LangChain & Next.js
+[span] Google Developer Student Club (GDSC BMU)
+[p] Step-by-step practical laboratory workshop. Build and deploy multimodal autonomous reasoning agents with vector memory and custom tool integration.
+[span] Siddharth Rao (Staff ML Engineer, Swiggy)
+[span] Tue, 18 Aug
+[span] 04:00 PM
+[span] Workshop Building - Computer Lab 304
+[span] GenAI
+[span] NextJS
+[span] LangChain
+[span] RSVP
+[span] 118
+[span] Sports
+[span] 350
+[span] cap
+[span] 105 left
+[h3] BMU Inter-Hostel Box Cricket Championship 2026
+[span] BMU Sports & Athletics Council
+[p] High-octane 6-a-side floodlight tournament between Hostels H1, H2, H3, H4, Tower A, B, and C. Trophy, medals, and bragging rights on the line.
+[span] Wed, 19 Aug
+[span] 07:00 PM
+[span] Sports Complex Floodlit Turf Arena
+[span] Cricket
+[span] HostelCup
+[span] NightMatches
+[span] RSVP
+[span] 245
+[span] Workshops
+[span] 100
+[span] cap
+[span] 8 left
+[h3] RoboWars 2026: Combat Robot Design Clinic & Arena Testing
+[span] Robotics Club BMU (Sierra)
+[p] Learn chassis machining, high-torque BLDC motor ESC configuration, and pneumatic flipper mechanics for 15kg/30kg combat bots.
+[span] Thu, 20 Aug
+[span] 03:30 PM
+[span] Fabrication & Mechatronics Lab (Ground Floor)
+[span] Robotics
+[span] CombatBots
+[span] Hardware
+[span] RSVP
+[span] Academic
+[span] 200
+[span] cap
+[span] 35 left
+[h3] Executive Masterclass: Scaling Product Architecture to 10M+ DAU
+[span] School of Engineering & Technology (SOET)
+[p] Learn how distributed event-driven microservices, Redis caching tiers, and database sharding operate at global scale.
+[span] Rohit Bansal, VP Engineering at Pine Labs
+[span] Mon, 24 Aug
+[span] 11:00 AM
+[span] Seminar Hall 1 (Tower A)
+[span] SystemDesign
+[span] Cloud
+[span] Microservices
+[span] Attending
+[span] 165
+[span] Ask AI
+[span] AnyModel
+[span] BMU_Community • Test Run Mode
+[h3] Demo & Evaluation Test Website
+[span] Notice for Evaluators & Reviewers
+[p] This platform is actively running in
+[strong] Test Run / Prototype Mode
+[p] for
+[span] BMU_Community (CampusPulse)
+[p] . Pre-populated mock data for BML Munjal University is active for live testing.
+[span] Currently Logged In Profile
+[span] Active Session
+[span] Aarav Sharma
+[span] 22CS0142
+[div] Computer Science & Engineering
+[div] Radhakrishnan Hostel (H2)
+[div] Quick-Switch Test Persona:
+[span] Aarav
+[span] Ananya
+[span] Kabir
+[span] Priya
+[div] What You Can Test in this Build:
+[strong] 1-Click RSVPs & Passes
+[div] RSVP for HackBMU 7.0 & generate verified digital QR gate passes.
+[strong] Sports Turf Booking
+[div] Live slot reservation for Badminton, Football, and Cricket arena.
+[strong] Peer Skill & Gear Swap
+[div] Post new listings, trade hardware/notes, and test real-time chat drawer.
+[strong] Multi-Tab Telemetry Sync
+[div] Open two browser tabs side-by-side to see instant live state propagation.
+[span] Reset Test Data to Default
+[span] Enter Test Website
+[span] CampusPulse BMU OS
+[span] BML Munjal University, Sidhrawali, NH-48
+[span] TEST RUN ENVIRONMENT
+[span] Google Calendar Sync
+[span] BMU Pulse AI
+[span] Test Run Mode
+[button] Student ID Card
+[button] SOS Emergency Helpline

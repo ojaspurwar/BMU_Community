@@ -44,3 +44,6 @@ Thumbs.db
 
 # Antigravity artifacts
 .system_generated/
+
+# Temporary extraction folder
+BMU_Community-main/
