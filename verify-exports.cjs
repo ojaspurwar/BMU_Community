@@ -15,7 +15,9 @@ const components = [
   'MyScheduleModal',
   'EventPassModal',
   'MarketplaceChatDrawer',
-  'NoticeDetailModal'
+  'NoticeDetailModal',
+  'StudentCirclesModule',
+  'AdminPortalModule'
 ];
 
 for (const c of components) {

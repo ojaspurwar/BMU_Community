@@ -162,34 +162,39 @@ export function MarketplaceModule() {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Skill Swap Spotlight Header Banner - Emerald Green & Cobalt Blue */}
-      <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-emerald-950/40 border border-emerald-500/40 p-6 sm:p-7 shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="space-y-2">
-            <div className="flex items-center space-x-2">
-              <span className="flex items-center space-x-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[11px] font-black uppercase px-3 py-0.5 rounded-full shadow-sm">
-                <ArrowRightLeft className="w-3.5 h-3.5 animate-pulse" />
-                <span>Zero-Fee Peer Economy</span>
+    <div className="space-y-8 sm:space-y-10">
+      {/* Marketplace & Skill Trade Header Banner */}
+      <div className="glass-panel-luxury border-emerald-500/30 p-7 sm:p-9 relative overflow-hidden shadow-2xl">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+        <div className="absolute bottom-0 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-2.5 max-w-2xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="flex items-center space-x-1.5 bg-emerald-500/15 text-emerald-300 font-extrabold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider border border-emerald-500/30">
+                <ArrowRightLeft className="w-4 h-4 text-emerald-400" />
+                <span>Zero-Commission Peer Trade</span>
               </span>
-              <span className="text-xs text-slate-400">Verified BMU Student Network</span>
+              <span className="text-xs bg-slate-800/80 text-sky-400 font-bold px-3 py-1 rounded-full border border-white/[0.08]">
+                BMU Internal Swaps
+              </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-              Skill Swaps, Course Hardware & Textbook Exchange
+
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-snug">
+              Campus Marketplace & Skill Exchange
             </h2>
-            <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+            <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
               Trade your coding/math expertise for UI design, pass down lab kits (ESP32/Arduino), or find dorm essentials directly inside BMU hostels without retail markups.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
             <button
               onClick={() => setShowMatchmaker(!showMatchmaker)}
-              className={`flex items-center space-x-1.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold border transition-all ${
+              className={`flex items-center space-x-2 px-4 py-3 rounded-2xl text-xs font-bold border transition-all ${
                 showMatchmaker
                   ? 'bg-blue-600/30 text-sky-300 border-blue-500/50'
-                  : 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700'
+                  : 'bg-white/[0.04] text-slate-200 border-white/[0.09] hover:bg-white/[0.08]'
               }`}
             >
               <Sparkles className="w-4 h-4 text-sky-400" />
@@ -201,7 +206,7 @@ export function MarketplaceModule() {
                 setPostMode('SkillSwap');
                 setIsPostOpen(true);
               }}
-              className="flex items-center space-x-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-4 py-2.5 rounded-2xl text-xs shadow-lg shadow-emerald-600/25 transition-all hover:scale-105"
+              className="flex items-center space-x-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-5 py-3 rounded-2xl text-xs shadow-lg shadow-emerald-600/25 transition-all hover:scale-105"
             >
               <Repeat className="w-4 h-4" />
               <span>Offer a Skill Swap</span>
@@ -212,7 +217,7 @@ export function MarketplaceModule() {
                 setPostMode('Item');
                 setIsPostOpen(true);
               }}
-              className="flex items-center space-x-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold px-4 py-2.5 rounded-2xl text-xs shadow-lg shadow-blue-600/25 transition-all hover:scale-105"
+              className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold px-5 py-3 rounded-2xl text-xs shadow-lg shadow-blue-600/25 transition-all hover:scale-105"
             >
               <Plus className="w-4 h-4" />
               <span>Sell / Give Gear</span>
@@ -223,10 +228,10 @@ export function MarketplaceModule() {
 
       {/* Interactive Skill Matchmaker Engine Drawer Bar */}
       {showMatchmaker && (
-        <div className="p-4 sm:p-5 bg-gradient-to-r from-blue-950/30 via-slate-900 to-emerald-950/30 border border-emerald-500/30 rounded-3xl space-y-3 animate-fade-in shadow-xl">
+        <div className="glass-panel-luxury border-emerald-500/40 p-6 sm:p-7 space-y-4 animate-smooth-in shadow-2xl">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Sparkles className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center space-x-2.5">
+              <Sparkles className="w-4 h-4 text-emerald-400 animate-pulse" />
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
                 Instant Peer Skill Matchmaker Engine
               </h3>
@@ -236,15 +241,15 @@ export function MarketplaceModule() {
                 setMatchmakerOffer('');
                 setMatchmakerSeek('');
               }}
-              className="text-[11px] text-slate-400 hover:text-white transition-colors"
+              className="text-xs text-slate-400 hover:text-white transition-colors glass-pill px-3 py-1 rounded-lg"
             >
               Reset Match Filters
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-emerald-400 mb-1">
+              <label className="block text-xs font-semibold text-emerald-400 mb-1.5">
                 What skill can you offer/teach?
               </label>
               <input
@@ -252,12 +257,12 @@ export function MarketplaceModule() {
                 placeholder="e.g. DSA, React, Python, Math, CAD..."
                 value={matchmakerOffer}
                 onChange={(e) => setMatchmakerOffer(e.target.value)}
-                className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                className="w-full px-4 py-2.5 bg-slate-950/80 border border-white/[0.09] rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-sky-400 mb-1">
+              <label className="block text-xs font-semibold text-sky-400 mb-1.5">
                 What skill do you want to learn?
               </label>
               <input
@@ -265,7 +270,7 @@ export function MarketplaceModule() {
                 placeholder="e.g. Figma, Machine Learning, Calculus, Video Editing..."
                 value={matchmakerSeek}
                 onChange={(e) => setMatchmakerSeek(e.target.value)}
-                className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500"
+                className="w-full px-4 py-2.5 bg-slate-950/80 border border-white/[0.09] rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500"
               />
             </div>
           </div>
@@ -273,44 +278,44 @@ export function MarketplaceModule() {
       )}
 
       {/* Filters & Search Control Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 glass-panel-luxury p-5 sm:p-6">
         {/* Category Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25'
-                  : 'bg-slate-800/80 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 scale-105'
+                  : 'bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]'
               }`}
             >
-              {cat === 'Skill Swap' && <ArrowRightLeft className="w-3 h-3 text-emerald-400" />}
-              {cat === 'Hardware & Components' && <Cpu className="w-3 h-3 text-blue-400" />}
-              {cat === 'Textbooks & Notes' && <BookOpen className="w-3 h-3 text-amber-400" />}
+              {cat === 'Skill Swap' && <ArrowRightLeft className="w-3.5 h-3.5 text-emerald-400" />}
+              {cat === 'Hardware & Components' && <Cpu className="w-3.5 h-3.5 text-blue-400" />}
+              {cat === 'Textbooks & Notes' && <BookOpen className="w-3.5 h-3.5 text-amber-400" />}
               <span>{cat}</span>
             </button>
           ))}
         </div>
 
         {/* Search & Listing Type Filter */}
-        <div className="flex items-center gap-2.5">
-          <div className="relative flex-1 md:w-56">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+        <div className="flex items-center gap-3">
+          <div className="relative flex-1 md:w-64">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search gear, book, skill..."
               value={searchFilter}
               onChange={(e) => setSearchFilter(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50"
+              className="w-full pl-9 pr-3.5 py-2 bg-slate-950/80 border border-white/[0.09] rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50"
             />
           </div>
 
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value as 'All' | ListingType)}
-            className="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-emerald-500/50"
+            className="px-3.5 py-2 bg-slate-950/80 border border-white/[0.09] rounded-xl text-xs text-slate-300 focus:outline-none focus:border-emerald-500/50 cursor-pointer"
           >
             <option value="All">All Types</option>
             <option value="Swap">🔄 Skill Swaps</option>
@@ -320,8 +325,8 @@ export function MarketplaceModule() {
         </div>
       </div>
 
-      {/* Marketplace Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* Marketplace Grid - Spacious 3 Columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
         {filteredItems.map((item) => {
           const isSaved = item.saves.includes(currentUser.id);
           const isSwap = item.type === 'Swap';
@@ -330,45 +335,45 @@ export function MarketplaceModule() {
           return (
             <div
               key={item.id}
-              className={`group flex flex-col justify-between rounded-3xl bg-slate-900/80 border p-5 transition-all duration-200 shadow-lg ${
+              className={`group flex flex-col justify-between glass-card-luxury p-6 sm:p-7 transition-all duration-300 shadow-xl ${
                 isSwap
-                  ? 'border-emerald-500/40 hover:border-emerald-500/70 bg-gradient-to-b from-slate-900 via-slate-900 to-emerald-950/20'
-                  : 'border-slate-800/90 hover:border-blue-500/40'
+                  ? 'border-emerald-500/40 hover:border-emerald-500/70 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-emerald-950/20'
+                  : 'hover:border-blue-500/50'
               }`}
             >
-              <div className="space-y-3.5">
+              <div className="space-y-4">
                 {/* Header Tag & Price / Swap Status */}
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-1.5">
+                  <div className="flex items-center space-x-2">
                     <span
-                      className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-lg border ${
+                      className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-lg border ${
                         isSwap
                           ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-                          : 'bg-slate-800 text-sky-400 border-slate-700'
+                          : 'bg-slate-800/80 text-sky-400 border-slate-700'
                       }`}
                     >
                       {item.category}
                     </span>
-                    <span className="text-[10px] text-slate-400 bg-slate-950 px-2 py-0.5 rounded-md border border-slate-800">
+                    <span className="text-xs text-slate-400 bg-slate-950/80 px-2.5 py-1 rounded-lg border border-white/[0.08] font-mono">
                       {item.condition}
                     </span>
                   </div>
 
                   <button
                     onClick={() => toggleSaveItem(item.id)}
-                    className={`p-1.5 rounded-lg transition-colors ${
+                    className={`p-2 rounded-xl transition-colors ${
                       isSaved
-                        ? 'text-rose-400 bg-rose-500/10'
-                        : 'text-slate-500 hover:text-slate-300 bg-slate-800/60'
+                        ? 'text-rose-400 bg-rose-500/15 border border-rose-500/30'
+                        : 'text-slate-400 hover:text-white bg-white/[0.04] border border-white/[0.08]'
                     }`}
                     title="Bookmark Listing"
                   >
-                    <Bookmark className={`w-3.5 h-3.5 ${isSaved ? 'fill-current' : ''}`} />
+                    <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} />
                   </button>
                 </div>
 
                 {/* Title */}
-                <h3 className="font-bold text-base text-slate-100 group-hover:text-emerald-400 transition-colors leading-snug">
+                <h3 className="font-bold text-lg text-slate-100 group-hover:text-emerald-400 transition-colors leading-snug">
                   {item.title}
                 </h3>
 

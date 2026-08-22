@@ -20,6 +20,7 @@ function resolvePkg(name) {
 const sucrase = resolvePkg('sucrase') || require('sucrase');
 let PORT = parseInt(process.env.PORT || '4040', 10);
 const DEFAULT_OPENROUTER_KEY = process.env.OPENROUTER_API_KEY || '';
+const SERVER_START_TIME = Date.now();
 
 // Compile Tailwind on startup if tools are available
 async function compileCSS() {
@@ -60,6 +61,7 @@ const ESM_MAP = {
   'framer-motion': 'https://esm.sh/framer-motion@12.4.7',
 };
 
+
 function transformTSX(filePath, code) {
   // Strip Next.js directives & raw css imports
   let preprocessed = code.replace(/['"]use client['"];?/g, '');
@@ -88,22 +90,24 @@ function transformTSX(filePath, code) {
       else if (fs.existsSync(path.join(ROOT, 'src', p1, 'index.tsx'))) resolved += '/index.tsx';
       else if (fs.existsSync(path.join(ROOT, 'src', p1, 'index.ts'))) resolved += '/index.ts';
     }
-    return `from '${resolved}'`;
+    const timestamp = SERVER_START_TIME;
+    return `from '${resolved}?t=${timestamp}'`;
   });
 
-  // Rewrite relative imports without extension (e.g. from './app/page')
-  const currentDir = path.dirname(filePath);
+  // Rewrite local imports to include extensions and cache-buster
+  const timestamp = SERVER_START_TIME;
   transformed = transformed.replace(/from\s+['"](\.[^'"]+)['"]/g, (match, p1) => {
     if (p1.endsWith('.css')) return `// CSS: ${p1}`;
     let resolved = p1;
-    if (!resolved.endsWith('.ts') && !resolved.endsWith('.tsx') && !resolved.endsWith('.js')) {
+    if (!path.extname(p1)) {
+      const currentDir = path.dirname(filePath);
       const fullPath = path.resolve(currentDir, p1);
       if (fs.existsSync(`${fullPath}.tsx`)) resolved += '.tsx';
       else if (fs.existsSync(`${fullPath}.ts`)) resolved += '.ts';
       else if (fs.existsSync(path.join(fullPath, 'index.tsx'))) resolved += '/index.tsx';
       else if (fs.existsSync(path.join(fullPath, 'index.ts'))) resolved += '/index.ts';
     }
-    return `from '${resolved}'`;
+    return `from '${resolved}?t=${timestamp}'`;
   });
 
   // Rewrite bare ESM imports (react, lucide-react, etc.)
@@ -123,6 +127,9 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Title, HTTP-Referer');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CampusPulse - Peer Swap</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#6f3900",
+                      "secondary": "#ebb2ff",
+                      "tertiary-fixed-dim": "#ffb77f",
+                      "on-primary-fixed": "#002022",
+                      "surface-dim": "#121318",
+                      "on-primary": "#00363a",
+                      "surface-container": "#1e1f25",
+                      "on-surface": "#e3e1e9",
+                      "inverse-surface": "#e3e1e9",
+                      "cyber-border": "rgba(0, 240, 255, 0.2)",
+                      "bg-obsidian": "#050608",
+                      "surface-tint": "#00dbe9",
+                      "surface-variant": "#34343a",
+                      "on-background": "#e3e1e9",
+                      "on-secondary-container": "#fff6fc",
+                      "surface": "#121318",
+                      "outline-variant": "#3b494b",
+                      "surface-container-highest": "#34343a",
+                      "inverse-primary": "#006970",
+                      "primary-container": "#00f0ff",
+                      "on-secondary": "#520072",
+                      "error": "#ffb4ab",
+                      "primary": "#dbfcff",
+                      "surface-container-high": "#292a2f",
+                      "on-tertiary": "#4e2600",
+                      "tertiary-container": "#ffd0ae",
+                      "on-error-container": "#ffdad6",
+                      "secondary-fixed": "#f8d8ff",
+                      "surface-bright": "#38393f",
+                      "inverse-on-surface": "#2f3036",
+                      "on-error": "#690005",
+                      "tertiary-fixed": "#ffdcc4",
+                      "surface-container-low": "#1a1b21",
+                      "secondary-fixed-dim": "#ebb2ff",
+                      "on-secondary-fixed": "#320047",
+                      "on-surface-variant": "#b9cacb",
+                      "tertiary": "#fff3ed",
+                      "on-tertiary-fixed": "#2f1500",
+                      "on-primary-fixed-variant": "#004f54",
+                      "secondary-container": "#b600f8",
+                      "outline": "#849495",
+                      "background": "#121318",
+                      "primary-fixed-dim": "#00dbe9",
+                      "on-tertiary-container": "#924c00",
+                      "on-primary-container": "#006970",
+                      "surface-container-lowest": "#0d0e13",
+                      "on-secondary-fixed-variant": "#74009f",
+                      "error-container": "#93000a",
+                      "neon-green": "#39FF14",
+                      "primary-fixed": "#7df4ff",
+                      "neon-red": "#FF3131",
+                      "surface-glass": "rgba(16, 20, 28, 0.6)"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "48px",
+                      "stack-sm": "12px",
+                      "container-margin": "24px",
+                      "gutter": "16px",
+                      "base": "8px",
+                      "stack-md": "24px"
+              },
+              "fontFamily": {
+                      "label-caps": ["JetBrains Mono"],
+                      "data-mono": ["JetBrains Mono"],
+                      "headline-md": ["Sora"],
+                      "headline-lg": ["Sora"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "body-md": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Sora"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                      "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                      "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                      "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "headline-lg-mobile": ["30px", { "lineHeight": "36px", "fontWeight": "700" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for cyber aesthetic */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #050608; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 240, 255, 0.5); }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 15px var(--tw-shadow-color);
+        }
+        
+        /* Masonry column setup */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1280px) { .masonry-grid { column-count: 3; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-bg-obsidian text-on-surface font-body-md text-body-md overflow-hidden relative">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface-glass backdrop-blur-lg border-b border-cyber-border shadow-[0_4px_30px_rgba(0,0,0,0.1)] text-primary-fixed-dim">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary-container drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
+            CampusPulse
+        </div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-data-mono text-data-mono hover:text-primary-fixed-dim transition-all duration-300 scale-95 active:scale-90" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-data-mono text-data-mono hover:text-primary-fixed-dim transition-all duration-300 scale-95 active:scale-90" href="#">Sports</a>
+<a class="text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 font-data-mono text-data-mono scale-95 active:scale-90" href="#">Peer Swap</a>
+<a class="text-on-surface-variant font-data-mono text-data-mono hover:text-primary-fixed-dim transition-all duration-300 scale-95 active:scale-90" href="#">Academic Hub</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="hover:text-primary-fixed-dim transition-all duration-300 scale-95 active:scale-90"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary-fixed-dim transition-all duration-300 scale-95 active:scale-90"><span class="material-symbols-outlined">person_pin</span></button>
+<button class="hover:text-primary-fixed-dim transition-all duration-300 scale-95 active:scale-90"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 hidden lg:flex flex-col w-64 bg-surface-container-lowest/80 backdrop-blur-xl border-r border-cyber-border shadow-2xl pb-4">
+<div class="p-6 border-b border-cyber-border/50">
+<div class="w-12 h-12 rounded-full bg-surface-variant border border-cyber-border mb-3 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed-dim">person</span>
+</div>
+<h2 class="font-data-mono text-data-mono text-secondary">CYBER_ID: 808</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">STATUS: ENCRYPTED</p>
+<button class="mt-4 w-full py-2 bg-secondary/10 border border-secondary text-secondary font-label-caps text-label-caps hover:bg-secondary/20 transition-colors shadow-secondary/50 glow-effect">
+                ACTIVATE AI
+            </button>
+</div>
+<div class="flex-1 py-4 flex flex-col gap-2 font-data-mono text-data-mono">
+<a class="text-on-surface-variant hover:text-secondary px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-colors hover:glow-secondary" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="text-on-surface-variant hover:text-secondary px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-colors hover:glow-secondary" href="#">
+<span class="material-symbols-outlined">sports_esports</span> Sports Arena
+            </a>
+<a class="bg-secondary-container/20 text-secondary border-l-4 border-secondary px-4 py-3 flex items-center gap-3 shadow-secondary/50 glow-effect" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">swap_horizontal_circle</span> Peer Swap
+            </a>
+<a class="text-on-surface-variant hover:text-secondary px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-colors hover:glow-secondary" href="#">
+<span class="material-symbols-outlined">school</span> Academic Hub
+            </a>
+<a class="text-on-surface-variant hover:text-secondary px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-colors hover:glow-secondary" href="#">
+<span class="material-symbols-outlined">smart_toy</span> AI Command
+            </a>
+</div>
+<div class="mt-auto px-4 py-2 border-t border-cyber-border/50 flex flex-col gap-2 font-data-mono text-data-mono">
+<a class="text-on-surface-variant hover:text-secondary py-2 flex items-center gap-3 hover:bg-surface-variant/30 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span> Logout
+            </a>
+<a class="text-on-surface-variant hover:text-secondary py-2 flex items-center gap-3 hover:bg-surface-variant/30 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span> Help
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="h-[calc(100vh-64px)] mt-16 lg:ml-64 overflow-y-auto pb-24 lg:pb-8 relative">
+<!-- Ambient Background Glow -->
+<div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="p-4 lg:p-container-margin max-w-7xl mx-auto relative z-10">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-stack-md">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-primary-fixed-dim drop-shadow-[0_0_8px_rgba(0,240,255,0.3)]">Exchange Protocol</h1>
+<p class="font-data-mono text-data-mono text-on-surface-variant mt-2">Peer-to-peer resource network. Active nodes: 142.</p>
+</div>
+<button class="bg-primary-container text-on-primary-fixed px-6 py-3 flex items-center gap-2 font-label-caps text-label-caps hover:bg-primary-fixed shadow-primary-container/50 glow-effect transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    REQUEST A SWAP
+                </button>
+</div>
+<!-- Filter Command Bar -->
+<div class="flex gap-4 overflow-x-auto pb-4 mb-stack-md hide-scrollbar">
+<button class="px-4 py-2 border border-primary-fixed-dim bg-primary-container/10 text-primary-fixed-dim font-label-caps text-label-caps whitespace-nowrap rounded-sm shadow-primary-container/30 glow-effect">ALL NODES</button>
+<button class="px-4 py-2 border border-cyber-border bg-surface-glass text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:border-secondary hover:text-secondary transition-colors">HARDWARE</button>
+<button class="px-4 py-2 border border-cyber-border bg-surface-glass text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:border-secondary hover:text-secondary transition-colors">SKILLS</button>
+<button class="px-4 py-2 border border-cyber-border bg-surface-glass text-on-surface-variant font-label-caps text-label-caps whitespace-nowrap hover:border-secondary hover:text-secondary transition-colors">BOOKS</button>
+</div>
+<!-- Masonry Grid for Listings -->
+<div class="masonry-grid">
+<!-- Item 1: Hardware -->
+<div class="masonry-item bg-surface-glass border border-cyber-border relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="h-48 w-full border-b border-cyber-border relative">
+<img class="w-full h-full object-cover opacity-80 mix-blend-screen" data-alt="A highly detailed close-up shot of an electronic Arduino circuit board resting on a sleek dark surface, illuminated by striking electric blue neon ambient lighting that creates a deep, high-tech glassmorphism aesthetic. Components cast sharp, subtle shadows, evoking a sophisticated engineering lab environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSrzxB0X1BltLKEcgTJo5KkED5T721cH5eUscsutqqom5fWw2Qizvb1BSAxwuwp-NA7K71jEJKYNqwiwY8HfgvKGFS5GtqZUu9C-m0dM5NJRBuMKkAo0DSdr03oeJKkBW-vEkomnXXqqTpy6lESzPf2-0BSr384JgSjPJJDCcvJ9cyY6PfeKWFh_boDbexbzX87OyO2AMCkfXSgNoKwZdnTS0kb08iv6B7Qny8N6SiExlF_PYbA-wi"/>
+<div class="absolute top-3 left-3 bg-primary-container/20 border border-primary-fixed-dim text-primary-fixed-dim px-2 py-1 font-label-caps text-[10px] backdrop-blur-md">HARDWARE</div>
+</div>
+<div class="p-5">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Arduino Mega 2560 Starter Kit</h3>
+<p class="font-body-md text-on-surface-variant mb-4 line-clamp-2">Barely used kit, perfect for intro robotics. Looking to swap for a decent mechanical keyboard or solid state drive.</p>
+<div class="flex items-center justify-between pt-4 border-t border-cyber-border/50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-cyber-border">
+<img class="w-full h-full object-cover" data-alt="A futuristic cyberpunk-style avatar portrait of a university student in a sleek dark setting with cool blue undertones. The figure is subtly illuminated by a glowing screen off-camera, embodying a high-end, academic tech-operator aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9SvCUE4eJNzQvD7Kuhza2mWVkL658oLyfMfSgFNsGIHQX5lJmfV2y-nd-Lc64fu4-AxqeKqPrQL5Nl-yv9-VJLa4ATPVqIZfLdK0Zg7ObtnIAEEelPDJRWeSn0iRXDPS1VXYla2nqzQt4I9baS7jXR18zscfu347tiyOWhDCMzXNDt1J906Ktepn1LXW2CHFC5APYtc1q6aDgZ8jt_Cvhy9J6P9XtIVmXJ6_s6AsIeywtk5by0QiQ"/>
+</div>
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-[12px] text-on-surface">Alex_T</span>
+<div class="flex items-center gap-1 text-neon-green">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-[10px]">VERIFIED STUDENT</span>
+</div>
+</div>
+</div>
+<button aria-label="I'm interested" class="w-10 h-10 rounded-full bg-secondary-container/10 border border-secondary text-secondary flex items-center justify-center hover:bg-secondary/20 transition-all shadow-secondary/50 glow-effect">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2: Skill -->
+<div class="masonry-item bg-surface-glass border border-cyber-border relative overflow-hidden group">
+<div class="p-5 border-l-2 border-secondary bg-gradient-to-r from-secondary-container/10 to-transparent">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-secondary/20 border border-secondary text-secondary px-2 py-1 font-label-caps text-[10px] inline-block">SKILL SWAP</div>
+<span class="material-symbols-outlined text-secondary text-3xl opacity-50">code</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Advanced Python &amp; Data Structs</h3>
+<p class="font-body-md text-on-surface-variant mb-4">Offering 2 hours of tutoring per week. I need help with UI/UX prototyping in Figma for my final project.</p>
+<div class="flex items-center justify-between pt-4 border-t border-cyber-border/50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center border border-cyber-border text-on-surface font-label-caps text-label-caps">
+                                    SK
+                                </div>
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-[12px] text-on-surface">Sam_K</span>
+<div class="flex items-center gap-1 text-neon-green">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-[10px]">VERIFIED STUDENT</span>
+</div>
+</div>
+</div>
+<button class="px-4 py-2 bg-secondary-container/10 border border-secondary text-secondary flex items-center gap-2 font-label-caps text-[12px] hover:bg-secondary/20 transition-all shadow-secondary/50 glow-effect">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+                                CONNECT
+                            </button>
+</div>
+</div>
+</div>
+<!-- Item 3: Book -->
+<div class="masonry-item bg-surface-glass border border-cyber-border relative overflow-hidden group">
+<div class="h-56 w-full border-b border-cyber-border relative">
+<img class="w-full h-full object-cover opacity-70" data-alt="A thick, modern textbook titled 'Algorithm Design' sitting on a reflective obsidian desk. The scene is lit by ambient purple and cyan neon lights, typical of a cyberpunk hacker workspace or a high-tech library, creating a moody, minimalist academic vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKJ19dzJsLffE6yJZrlmO8gknTSud0YGc7PRVCpx5fvxGDmTy4xzAmYqBe-CKrm6LyfbwRNGu6UJTNXJ9uhbKMF8miEuNnL4f-Wmu_QouE_V974qHr0U6vslJNeIRHN7JIeF73nSFq4e-UW3nThBURMOoNCuAI_A6QDSZ36MPS_AYObOwDQd4QsJSeXk9GopkfGHBmj16yw0w0JhcpViOthI0AenKzZHeWwTOFvOEvIdr_5GGDcmVt"/>
+<div class="absolute top-3 left-3 bg-tertiary-container/20 border border-tertiary-fixed-dim text-tertiary-fixed-dim px-2 py-1 font-label-caps text-[10px] backdrop-blur-md">TEXTBOOK</div>
+</div>
+<div class="p-5">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Algorithm Design - 2nd Ed</h3>
+<p class="font-body-md text-on-surface-variant mb-4">Good condition. Minor highlighting. Looking for Discrete Mathematics 3rd Ed or equivalent.</p>
+<div class="flex items-center justify-between pt-4 border-t border-cyber-border/50">
+<div class="flex items-center gap-3">
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-[12px] text-on-surface">Node_99</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">UNVERIFIED</span>
+</div>
+</div>
+<button aria-label="I'm interested" class="w-10 h-10 rounded-full bg-surface-variant border border-outline text-on-surface-variant flex items-center justify-center hover:text-primary-fixed-dim hover:border-primary-fixed-dim transition-all">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 lg:hidden bg-surface-glass backdrop-blur-md border-t border-cyber-border shadow-[0_-5px_15px_rgba(0,219,233,0.1)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-transform active:scale-90 font-label-caps text-label-caps text-[10px]" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+            Home
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-transform active:scale-90 font-label-caps text-label-caps text-[10px]" href="#">
+<span class="material-symbols-outlined mb-1">stadium</span>
+            Sports
+        </a>
+<a class="flex flex-col items-center justify-center text-primary-container bg-primary-container/10 rounded-xl p-2 drop-shadow-[0_0_5px_#00f0ff] font-label-caps text-label-caps text-[10px] active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+            Market
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-transform active:scale-90 font-label-caps text-label-caps text-[10px]" href="#">
+<span class="material-symbols-outlined mb-1">menu_book</span>
+            Study
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-transform active:scale-90 font-label-caps text-label-caps text-[10px]" href="#">
+<span class="material-symbols-outlined mb-1">psychology</span>
+            AI
+        </a>
+</nav>
+</body></html>

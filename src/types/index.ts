@@ -1,5 +1,7 @@
 export type ThemeAccent = 'tricolor' | 'emerald' | 'crimson' | 'sapphire';
 
+export type UserRole = 'student' | 'club_lead' | 'faculty' | 'admin';
+
 export interface UserProfile {
   id: string;
   name: string;
@@ -10,6 +12,7 @@ export interface UserProfile {
   avatar: string;
   hostel: string;
   roomNo: string;
+  role?: UserRole;
   reputation: number;
   badges: string[];
   bio?: string;
@@ -20,7 +23,39 @@ export interface UserProfile {
   sportsPlayed?: string[];
 }
 
-export type ActiveNavTab = 'today' | 'events' | 'marketplace' | 'sports' | 'notices';
+export type ActiveNavTab = 'today' | 'events' | 'circles' | 'marketplace' | 'sports' | 'notices' | 'admin';
+
+// --- STUDENT CIRCLES & COMMUNITY MEETUPS (SMALL EVENTS, GAMES, STUDY GROUPS) ---
+export type StudentCircleCategory = 'Gaming' | 'Study Jam' | 'Mini-Event' | 'Hangout' | 'Club Group';
+
+export interface StudentCircleMember {
+  id: string;
+  name: string;
+  rollNo: string;
+  avatar: string;
+  hostel: string;
+}
+
+export interface StudentCircle {
+  id: string;
+  title: string;
+  description: string;
+  category: StudentCircleCategory;
+  hostId: string;
+  hostName: string;
+  hostRoll: string;
+  hostAvatar: string;
+  hostHostel: string;
+  location: string;
+  date: string;
+  time: string;
+  maxMembers: number;
+  joinedMembers: StudentCircleMember[];
+  contactInfo?: string;
+  tags: string[];
+  status: 'Open' | 'Full' | 'Completed';
+  createdAt: string;
+}
 
 export type EventCategory = 'Coding' | 'Cultural' | 'Sports' | 'Workshops' | 'Academic' | 'Fest';
 

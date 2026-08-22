@@ -3,9 +3,12 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import {
   UserProfile,
+  UserRole,
   CampusEvent,
   MarketplaceItem,
   CampusNotice,
+  StudentCircle,
+  StudentCircleCategory,
   ThemeAccent,
   CampusWeather,
   ActiveNavTab,
@@ -21,6 +24,7 @@ import {
   initialEvents,
   initialMarketplaceItems,
   initialNotices,
+  initialStudentCircles,
   campusWeatherData,
   initialSportsFacilities,
   initialSportsMatches,
@@ -91,8 +95,14 @@ interface CampusPulseContextType {
   users: UserProfile[];
   createCustomProfile: (profile: Omit<UserProfile, 'id' | 'reputation'>) => void;
   updateCurrentUserProfile: (profile: Partial<UserProfile>) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (val: boolean) => void;
   isProfileModalOpen: boolean;
   setIsProfileModalOpen: (open: boolean) => void;
+  
+  // Admin Privileges & Role Management
+  isAdmin: boolean;
+  setUserRole: (role: UserRole) => void;
   
   // Theme Customization
   themeAccent: ThemeAccent;
@@ -110,12 +120,20 @@ interface CampusPulseContextType {
   // Weather & Live Campus Metrics
   campusWeather: CampusWeather;
   
-  // Events
+  // Official Events (Admin / Council Verified)
   events: CampusEvent[];
   toggleRSVP: (eventId: string) => void;
   addEvent: (event: Omit<CampusEvent, 'id' | 'rsvpCount' | 'rsvpUsers'>) => void;
+  deleteEvent: (eventId: string) => void;
   bookmarkedEvents: string[];
   toggleBookmarkEvent: (eventId: string) => void;
+  
+  // Student Circles (Casual Games, Study Groups, Small Events, Dorm Hangouts)
+  studentCircles: StudentCircle[];
+  addStudentCircle: (circle: Omit<StudentCircle, 'id' | 'createdAt' | 'joinedMembers' | 'status'>) => void;
+  joinStudentCircle: (circleId: string) => void;
+  leaveStudentCircle: (circleId: string) => void;
+  deleteStudentCircle: (circleId: string) => void;
   
   // Marketplace
   marketplaceItems: MarketplaceItem[];
@@ -127,6 +145,7 @@ interface CampusPulseContextType {
   notices: CampusNotice[];
   acknowledgeNotice: (noticeId: string) => void;
   addNotice: (notice: Omit<CampusNotice, 'id' | 'publishedAt' | 'acknowledgements'>) => void;
+  deleteNotice: (noticeId: string) => void;
   bookmarkedNotices: string[];
   toggleBookmarkNotice: (noticeId: string) => void;
   
@@ -188,10 +207,26 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
   const [users, setUsers] = useState<UserProfile[]>(mockUsers);
   const [currentUser, setCurrentUserState] = useState<UserProfile>(mockUsers[0]);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isAuthenticatedState, setIsAuthenticatedState] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('campuspulse_auth') === 'true';
+    }
+    return false;
+  });
   const [themeAccent, setThemeAccentState] = useState<ThemeAccent>('tricolor');
+
+  const setIsAuthenticated = useCallback((val: boolean) => {
+    setIsAuthenticatedState(val);
+    try {
+      localStorage.setItem('campuspulse_auth', val ? 'true' : 'false');
+    } catch(e) {}
+  }, []);
   
   const [events, setEvents] = useState<CampusEvent[]>(initialEvents);
   const [bookmarkedEvents, setBookmarkedEvents] = useState<string[]>([]);
+  
+  // Student Circles State (Casual games, study jams, dorm meetups, hobby clubs)
+  const [studentCircles, setStudentCircles] = useState<StudentCircle[]>(initialStudentCircles);
   
   const [marketplaceItems, setMarketplaceItems] = useState<MarketplaceItem[]>(initialMarketplaceItems);
   
@@ -221,7 +256,7 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
     {
       id: 'welcome-msg',
       role: 'assistant',
-      content: `👋 **Hi ${mockUsers[0].name.split(' ')[0]}!** I am **BMU Pulse AI**, your real-time campus assistant powered by OpenRouter AnyModel.\n\nAsk me about **HackBMU 7.0**, **Sports Arena Court Bookings**, **Peer Skill Swaps**, **CoE Exam Circulars**, or anything related to **BML Munjal University**!`,
+      content: `👋 **Hi ${mockUsers[0].name.split(' ')[0]}!** I am **BMU Pulse AI**, your real-time campus assistant powered by OpenRouter AnyModel.\n\nAsk me about **HackBMU 7.0**, **Sports Arena Court Bookings**, **Student Circles**, **Peer Skill Swaps**, **CoE Exam Circulars**, or anything related to **BML Munjal University**!`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       modelUsed: 'DeepSeek V3',
     },
@@ -265,6 +300,7 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
       const savedTheme = localStorage.getItem('campuspulse_theme');
       const savedEvents = localStorage.getItem('campuspulse_events');
       const savedEventBookmarks = localStorage.getItem('campuspulse_event_bm');
+      const savedCircles = localStorage.getItem('campuspulse_circles');
       const savedItems = localStorage.getItem('campuspulse_items');
       const savedNotices = localStorage.getItem('campuspulse_notices');
       const savedNoticeBookmarks = localStorage.getItem('campuspulse_notice_bm');
@@ -282,6 +318,7 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
       if (savedTheme) setThemeAccentState(savedTheme as ThemeAccent);
       if (savedEvents) setEvents(JSON.parse(savedEvents));
       if (savedEventBookmarks) setBookmarkedEvents(JSON.parse(savedEventBookmarks));
+      if (savedCircles) setStudentCircles(JSON.parse(savedCircles));
       if (savedItems) setMarketplaceItems(JSON.parse(savedItems));
       if (savedNotices) setNotices(JSON.parse(savedNotices));
       if (savedNoticeBookmarks) setBookmarkedNotices(JSON.parse(savedNoticeBookmarks));
@@ -307,6 +344,7 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
       const { type, payload } = event.data;
       if (type === 'SYNC_THEME') setThemeAccentState(payload);
       if (type === 'SYNC_EVENTS') setEvents(payload);
+      if (type === 'SYNC_STUDENT_CIRCLES') setStudentCircles(payload);
       if (type === 'SYNC_MARKETPLACE') setMarketplaceItems(payload);
       if (type === 'SYNC_NOTICES') setNotices(payload);
       if (type === 'SYNC_SPORTS_FACILITIES') setSportsFacilities(payload);
@@ -418,6 +456,31 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
     });
   }, []);
 
+  // --- ROLE MANAGEMENT & PRIVILEGES ---
+  const isAdmin = Boolean(
+    currentUser.role === 'admin' ||
+    currentUser.role === 'faculty' ||
+    currentUser.role === 'club_lead'
+  );
+
+  const setUserRole = useCallback((role: UserRole) => {
+    setCurrentUserState((prev) => {
+      const updated = { ...prev, role };
+      try {
+        localStorage.setItem('campuspulse_user', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    setUsers((prev) => {
+      const updated = prev.map((u) => (u.id === currentUser.id ? { ...u, role } : u));
+      try {
+        localStorage.setItem('campuspulse_users_list', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+  }, [currentUser.id]);
+
+
   const addEvent = useCallback((eventData: Omit<CampusEvent, 'id' | 'rsvpCount' | 'rsvpUsers'>) => {
     const newEvent: CampusEvent = {
       ...eventData,
@@ -434,6 +497,110 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
       return updated;
     });
   }, [currentUser.id, broadcast]);
+
+  const deleteEvent = useCallback((eventId: string) => {
+    setEvents((prev) => {
+      const updated = prev.filter((ev) => ev.id !== eventId);
+      try {
+        localStorage.setItem('campuspulse_events', JSON.stringify(updated));
+      } catch (e) {}
+      broadcast('SYNC_EVENTS', updated);
+      return updated;
+    });
+  }, [broadcast]);
+
+  // --- STUDENT CIRCLES ACTIONS (COMMUNITY SMALL EVENTS, GAMES, HANGOUTS) ---
+  const addStudentCircle = useCallback(
+    (circleData: Omit<StudentCircle, 'id' | 'createdAt' | 'joinedMembers' | 'status'>) => {
+      const newCircle: StudentCircle = {
+        ...circleData,
+        id: `circle-${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        status: 'Open',
+        joinedMembers: [
+          {
+            id: currentUser.id,
+            name: currentUser.name,
+            rollNo: currentUser.rollNo,
+            avatar: currentUser.avatar,
+            hostel: currentUser.hostel,
+          },
+        ],
+      };
+      setStudentCircles((prev) => {
+        const updated = [newCircle, ...prev];
+        try {
+          localStorage.setItem('campuspulse_circles', JSON.stringify(updated));
+        } catch (e) {}
+        broadcast('SYNC_STUDENT_CIRCLES', updated);
+        return updated;
+      });
+    },
+    [currentUser, broadcast]
+  );
+
+  const joinStudentCircle = useCallback(
+    (circleId: string) => {
+      setStudentCircles((prev) => {
+        const updated = prev.map((circle) => {
+          if (circle.id !== circleId) return circle;
+          const alreadyJoined = circle.joinedMembers.some((m) => m.id === currentUser.id);
+          if (alreadyJoined) return circle;
+          const updatedMembers = [
+            ...circle.joinedMembers,
+            {
+              id: currentUser.id,
+              name: currentUser.name,
+              rollNo: currentUser.rollNo,
+              avatar: currentUser.avatar,
+              hostel: currentUser.hostel,
+            },
+          ];
+          const status = updatedMembers.length >= circle.maxMembers ? ('Full' as const) : ('Open' as const);
+          return { ...circle, joinedMembers: updatedMembers, status };
+        });
+        try {
+          localStorage.setItem('campuspulse_circles', JSON.stringify(updated));
+        } catch (e) {}
+        broadcast('SYNC_STUDENT_CIRCLES', updated);
+        return updated;
+      });
+    },
+    [currentUser, broadcast]
+  );
+
+  const leaveStudentCircle = useCallback(
+    (circleId: string) => {
+      setStudentCircles((prev) => {
+        const updated = prev.map((circle) => {
+          if (circle.id !== circleId) return circle;
+          const updatedMembers = circle.joinedMembers.filter((m) => m.id !== currentUser.id);
+          const status = updatedMembers.length < circle.maxMembers ? ('Open' as const) : circle.status;
+          return { ...circle, joinedMembers: updatedMembers, status };
+        });
+        try {
+          localStorage.setItem('campuspulse_circles', JSON.stringify(updated));
+        } catch (e) {}
+        broadcast('SYNC_STUDENT_CIRCLES', updated);
+        return updated;
+      });
+    },
+    [currentUser.id, broadcast]
+  );
+
+  const deleteStudentCircle = useCallback(
+    (circleId: string) => {
+      setStudentCircles((prev) => {
+        const updated = prev.filter((c) => c.id !== circleId);
+        try {
+          localStorage.setItem('campuspulse_circles', JSON.stringify(updated));
+        } catch (e) {}
+        broadcast('SYNC_STUDENT_CIRCLES', updated);
+        return updated;
+      });
+    },
+    [broadcast]
+  );
 
   // --- MARKETPLACE ACTIONS ---
   const addMarketplaceItem = useCallback(
@@ -537,6 +704,17 @@ export function CampusPulseProvider({ children }: { children: React.ReactNode })
     },
     [currentUser.id, broadcast]
   );
+
+  const deleteNotice = useCallback((noticeId: string) => {
+    setNotices((prev) => {
+      const updated = prev.filter((not) => not.id !== noticeId);
+      try {
+        localStorage.setItem('campuspulse_notices', JSON.stringify(updated));
+      } catch (e) {}
+      broadcast('SYNC_NOTICES', updated);
+      return updated;
+    });
+  }, [broadcast]);
 
   // --- SPORTS ACTIONS ---
   const bookCourtSlot = useCallback((facilityId: string, slotTime: string): boolean => {
@@ -951,8 +1129,12 @@ GUIDELINES:
         users,
         createCustomProfile,
         updateCurrentUserProfile,
+        isAuthenticated: isAuthenticatedState,
+        setIsAuthenticated,
         isProfileModalOpen,
         setIsProfileModalOpen,
+        isAdmin,
+        setUserRole,
         themeAccent,
         setThemeAccent,
         activeAudioTrack,
@@ -966,8 +1148,14 @@ GUIDELINES:
         events,
         toggleRSVP,
         addEvent,
+        deleteEvent,
         bookmarkedEvents,
         toggleBookmarkEvent,
+        studentCircles,
+        addStudentCircle,
+        joinStudentCircle,
+        leaveStudentCircle,
+        deleteStudentCircle,
         marketplaceItems,
         addMarketplaceItem,
         toggleSaveItem,
@@ -975,6 +1163,7 @@ GUIDELINES:
         notices,
         acknowledgeNotice,
         addNotice,
+        deleteNotice,
         bookmarkedNotices,
         toggleBookmarkNotice,
         sportsFacilities,

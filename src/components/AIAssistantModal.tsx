@@ -194,7 +194,7 @@ export function AIAssistantModal() {
               title="Configure AnyModel & API Key"
             >
               <Cpu className="w-4 h-4 text-sky-400" />
-              <span className="hidden xs:inline text-[11px] font-bold">Model</span>
+              <span className="hidden sm:inline text-[11px] font-bold">Model</span>
               {showSettings ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
             </button>
 

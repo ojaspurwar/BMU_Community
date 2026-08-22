@@ -121,55 +121,51 @@ export function SportsModule() {
   const liveMatches = sportsMatches.filter((m) => m.status === 'LIVE');
 
   return (
-    <div className="space-y-6">
-      {/* Sports & Athletics Spotlight Hero - Green • Red • Blue Cyber Palette */}
-      <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-rose-950/40 border border-rose-500/40 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+    <div className="space-y-8 sm:space-y-10">
+      {/* Sports & Arena Flagship Hero Banner - Emerald & Crimson Red Cyber */}
+      <div className="glass-panel-luxury border-emerald-500/30 p-7 sm:p-9 relative overflow-hidden shadow-2xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          <div className="lg:col-span-8 space-y-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="flex items-center space-x-1.5 bg-gradient-to-r from-red-600 to-rose-600 text-white font-black text-[11px] px-3 py-1 rounded-full uppercase tracking-wider shadow-md shadow-red-600/20">
-                <Trophy className="w-3.5 h-3.5 fill-current animate-bounce" />
-                <span>BMU Athletics & Arena Grid</span>
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 space-y-4">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="flex items-center space-x-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider shadow-md shadow-emerald-600/30">
+                <Trophy className="w-4 h-4" />
+                <span>BMU Sports Arena Hub</span>
               </span>
-              <span className="text-xs bg-slate-800/90 text-emerald-400 font-bold px-2.5 py-0.5 rounded-full border border-slate-700 flex items-center space-x-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>6 Facilities Open</span>
-              </span>
-              <span className="text-xs text-slate-400">Hostel Premier League & Sangram 2026</span>
+              <span className="text-xs text-slate-300 font-semibold">Hostel Premier League & Sangram 2026</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-snug">
               Live Court Booking, Squad Matchups & Tournament League
             </h2>
 
-            <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+            <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
               Reserve indoor badminton courts, book the floodlit football turf, join spontaneous 3v3 basketball pickup games, and cheer for your hostel in real-time.
             </p>
 
             {/* Quick Metrics Bar */}
-            <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-300">
-              <div className="flex items-center space-x-1.5 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/60">
-                <Dumbbell className="w-3.5 h-3.5 text-sky-400" />
-                <span>Gym: <strong className="text-slate-100">38/50 Active</strong></span>
+            <div className="flex flex-wrap items-center gap-3.5 pt-2 text-xs text-slate-300">
+              <div className="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/60 font-semibold text-slate-200">
+                <Dumbbell className="w-4 h-4 text-sky-400" />
+                <span>Gym: <strong className="text-white">38/50 Active</strong></span>
               </div>
-              <div className="flex items-center space-x-1.5 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/60">
-                <Moon className="w-3.5 h-3.5 text-amber-400" />
+              <div className="flex items-center space-x-2 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/60 font-semibold text-slate-200">
+                <Moon className="w-4 h-4 text-amber-400" />
                 <span>Floodlights: <strong className="text-emerald-400">Active until 11 PM</strong></span>
               </div>
-              <div className="flex items-center space-x-1.5 bg-rose-500/10 px-3 py-1.5 rounded-xl border border-rose-500/30 text-rose-300 font-bold">
-                <Flame className="w-3.5 h-3.5 text-rose-400 animate-pulse" />
+              <div className="flex items-center space-x-2 bg-rose-500/15 px-3.5 py-2 rounded-xl border border-rose-500/30 text-rose-300 font-bold">
+                <Flame className="w-4 h-4 text-rose-400 animate-pulse" />
                 <span>{liveMatches.length} Live Tournaments</span>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-2.5 justify-center">
+          <div className="lg:col-span-4 flex flex-col gap-3 justify-center">
             <button
               onClick={() => setIsChallengeModalOpen(true)}
-              className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-600 text-white font-black py-3.5 px-6 rounded-2xl shadow-xl shadow-red-600/30 transition-all hover:scale-[1.02]"
+              className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-600 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-red-600/30 transition-all hover:scale-[1.02]"
             >
               <Zap className="w-4 h-4" />
               <span>Broadcast Squad Challenge</span>
@@ -177,7 +173,7 @@ export function SportsModule() {
 
             <button
               onClick={() => setActiveSubTab('matches')}
-              className="w-full flex items-center justify-center space-x-2 bg-slate-800/90 hover:bg-slate-700 text-sky-300 border border-blue-500/30 font-bold py-2.5 px-4 rounded-2xl text-xs transition-colors"
+              className="w-full flex items-center justify-center space-x-2 bg-slate-800/90 hover:bg-slate-700 text-sky-300 border border-blue-500/30 font-bold py-3 px-4 rounded-2xl text-xs transition-colors"
             >
               <Activity className="w-4 h-4 text-sky-400" />
               <span>View Live Match Scoreboard ({sportsMatches.length})</span>
@@ -187,32 +183,32 @@ export function SportsModule() {
       </div>
 
       {/* Sub-navigation Tabs: Facilities, Matches, Squad Finder */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/60 p-2.5 rounded-2xl border border-slate-800/80">
-        <div className="flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 glass-panel-luxury p-4 sm:p-5">
+        <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           <button
             onClick={() => setActiveSubTab('facilities')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-black transition-all ${
               activeSubTab === 'facilities'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-600/25'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-600/25 scale-105'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.05]'
             }`}
           >
-            <Dumbbell className="w-3.5 h-3.5" />
+            <Dumbbell className="w-4 h-4" />
             <span>Court & Arena Booking</span>
-            <span className="text-[10px] bg-black/20 px-1.5 py-0.2 rounded-full">
+            <span className="text-[10px] bg-black/30 px-2 py-0.5 rounded-full font-mono font-bold">
               {sportsFacilities.length}
             </span>
           </button>
 
           <button
             onClick={() => setActiveSubTab('matches')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-black transition-all ${
               activeSubTab === 'matches'
-                ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg shadow-red-600/25'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg shadow-red-600/25 scale-105'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.05]'
             }`}
           >
-            <Trophy className="w-3.5 h-3.5" />
+            <Trophy className="w-4 h-4" />
             <span>Live Matches & HPL</span>
             {liveMatches.length > 0 && (
               <span className="flex h-2 w-2 rounded-full bg-rose-400 animate-ping" />
@@ -221,45 +217,45 @@ export function SportsModule() {
 
           <button
             onClick={() => setActiveSubTab('squads')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-black transition-all ${
               activeSubTab === 'squads'
-                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/25'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/25 scale-105'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.05]'
             }`}
           >
-            <Users className="w-3.5 h-3.5" />
+            <Users className="w-4 h-4" />
             <span>Squad Finder & Pickups</span>
-            <span className="text-[10px] bg-black/20 px-1.5 py-0.2 rounded-full">
+            <span className="text-[10px] bg-black/30 px-2 py-0.5 rounded-full font-mono font-bold">
               {sportsSquadChallenges.length}
             </span>
           </button>
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search courts, matches, squad..."
             value={searchFilter}
             onChange={(e) => setSearchFilter(e.target.value)}
-            className="w-full pl-8 pr-3 py-1.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500/50"
+            className="w-full pl-9 pr-3.5 py-2 bg-slate-950/80 border border-white/[0.09] rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500/50"
           />
         </div>
       </div>
 
       {/* VIEW 1: FACILITIES & COURT BOOKING */}
       {activeSubTab === 'facilities' && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                   selectedCategory === cat
-                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25'
-                    : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 scale-105'
+                    : 'bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]'
                 }`}
               >
                 {cat}
@@ -267,8 +263,8 @@ export function SportsModule() {
             ))}
           </div>
 
-          {/* Facilities Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {/* Facilities Cards Grid - Spacious 3 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
             {filteredFacilities.map((fac) => {
               const occPercent = Math.round((fac.currentOccupancy / fac.maxCapacity) * 100);
               let occColor = 'bg-emerald-500 text-emerald-400';
