@@ -60,16 +60,18 @@ export function StudentCirclesModule() {
   const [contactInfo, setContactInfo] = useState('');
   const [tagsInput, setTagsInput] = useState('');
 
-  const filteredCircles = studentCircles.filter((circle) => {
-    const matchesCategory = selectedCategory === 'All' || circle.category === selectedCategory;
-    const matchesSearch =
-      circle.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      circle.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      circle.location.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      circle.hostName.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      circle.tags.some((t) => t.toLowerCase().includes(searchFilter.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const filteredCircles = React.useMemo(() => {
+    return studentCircles.filter((circle) => {
+      const matchesCategory = selectedCategory === 'All' || circle.category === selectedCategory;
+      const matchesSearch =
+        circle.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        circle.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        circle.location.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        circle.hostName.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        circle.tags.some((t) => t.toLowerCase().includes(searchFilter.toLowerCase()));
+      return matchesCategory && matchesSearch;
+    });
+  }, [studentCircles, selectedCategory, searchFilter]);
 
   const handleHostSubmit = (e: React.FormEvent) => {
     e.preventDefault();

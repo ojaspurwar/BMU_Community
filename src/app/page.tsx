@@ -3,12 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { useCampusPulse } from '@/lib/store';
 import { Navbar } from '@/components/Navbar';
-import { EventModule } from '@/components/EventModule';
-import { StudentCirclesModule } from '@/components/StudentCirclesModule';
-import { AdminPortalModule } from '@/components/AdminPortalModule';
-
-import { SportsModule } from '@/components/SportsModule';
-import { NoticeStreamModule } from '@/components/NoticeStreamModule';
+const EventModule = React.lazy(() => import('/src/components/EventModule.tsx').then(m => ({ default: m.EventModule })));
+const StudentCirclesModule = React.lazy(() => import('/src/components/StudentCirclesModule.tsx').then(m => ({ default: m.StudentCirclesModule })));
+const AdminPortalModule = React.lazy(() => import('/src/components/AdminPortalModule.tsx').then(m => ({ default: m.AdminPortalModule })));
+const SportsModule = React.lazy(() => import('/src/components/SportsModule.tsx').then(m => ({ default: m.SportsModule })));
+const NoticeStreamModule = React.lazy(() => import('/src/components/NoticeStreamModule.tsx').then(m => ({ default: m.NoticeStreamModule })));
 import { ProfileModal } from '@/components/ProfileModal';
 import { EmergencyQuickDial } from '@/components/EmergencyQuickDial';
 import { GlobalSearchModal } from '@/components/GlobalSearchModal';
@@ -112,9 +111,8 @@ export default function HomePage() {
         onOpenTestModal={() => setIsTestModalOpen(true)}
       />
 
-      {/* Main Container - Spacious & Organized */}
       <main className="relative z-10 flex-1 w-full max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-14 py-7 sm:py-9">
-        
+        <React.Suspense fallback={<div className="flex items-center justify-center h-64"><div className="w-8 h-8 rounded-full border-4 border-teal-500 border-t-transparent animate-spin"></div></div>}>
         {/* ======================================================== */}
         {/* TAB 1: TODAY (SPACIOUS & LUXURIOUS OVERVIEW) */}
         {/* ======================================================== */}
@@ -296,6 +294,7 @@ export default function HomePage() {
             <AdminPortalModule />
           </div>
         )}
+        </React.Suspense>
       </main>
 
       {/* Global Modals & Drawers */}

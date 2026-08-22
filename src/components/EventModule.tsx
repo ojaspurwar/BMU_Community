@@ -57,15 +57,17 @@ export function EventModule() {
   const [searchFilter, setSearchFilter] = useState('');
   const [selectedPassEvent, setSelectedPassEvent] = useState<CampusEvent | null>(null);
 
-  const filteredEvents = events.filter((ev) => {
-    const matchesCategory = selectedCategory === 'All' || ev.category === selectedCategory;
-    const matchesSearch =
-      ev.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      ev.organizer.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      ev.venue.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      ev.tags.some((t) => t.toLowerCase().includes(searchFilter.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const filteredEvents = React.useMemo(() => {
+    return events.filter((ev) => {
+      const matchesCategory = selectedCategory === 'All' || ev.category === selectedCategory;
+      const matchesSearch =
+        ev.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        ev.organizer.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        ev.venue.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        ev.tags.some((t) => t.toLowerCase().includes(searchFilter.toLowerCase()));
+      return matchesCategory && matchesSearch;
+    });
+  }, [events, selectedCategory, searchFilter]);
 
   const featuredEvent = events.find((e) => e.isFeatured) || events[0];
 

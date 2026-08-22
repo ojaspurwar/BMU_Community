@@ -53,16 +53,18 @@ export function NoticeStreamModule() {
   const [activeDetailNotice, setActiveDetailNotice] = useState<CampusNotice | null>(null);
 
 
-  const filteredNotices = notices.filter((not) => {
-    const matchesCategory = selectedCategory === 'All' || not.category === selectedCategory;
-    const matchesPriority = selectedPriority === 'All' || not.priority === selectedPriority;
-    const matchesSearch =
-      not.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      not.content.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      not.issuer.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      not.targetBatches.some((b) => b.toLowerCase().includes(searchFilter.toLowerCase()));
-    return matchesCategory && matchesPriority && matchesSearch;
-  });
+  const filteredNotices = React.useMemo(() => {
+    return notices.filter((not) => {
+      const matchesCategory = selectedCategory === 'All' || not.category === selectedCategory;
+      const matchesPriority = selectedPriority === 'All' || not.priority === selectedPriority;
+      const matchesSearch =
+        not.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        not.content.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        not.issuer.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        not.targetBatches.some((b) => b.toLowerCase().includes(searchFilter.toLowerCase()));
+      return matchesCategory && matchesPriority && matchesSearch;
+    });
+  }, [notices, selectedCategory, selectedPriority, searchFilter]);
 
 
 

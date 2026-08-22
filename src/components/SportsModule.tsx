@@ -66,14 +66,16 @@ export function SportsModule() {
   const [challengeSkill, setChallengeSkill] = useState<'All Levels Welcome' | 'Competitive' | 'Casual Knockabout'>('Competitive');
   const [challengeNotes, setChallengeNotes] = useState('');
 
-  const filteredFacilities = sportsFacilities.filter((fac) => {
-    const matchesCat = selectedCategory === 'All' || fac.category === selectedCategory;
-    const matchesSearch =
-      fac.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      fac.location.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      fac.equipmentAvailable.some((e) => e.toLowerCase().includes(searchFilter.toLowerCase()));
-    return matchesCat && matchesSearch;
-  });
+  const filteredFacilities = React.useMemo(() => {
+    return sportsFacilities.filter((fac) => {
+      const matchesCat = selectedCategory === 'All' || fac.category === selectedCategory;
+      const matchesSearch =
+        fac.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        fac.location.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        fac.equipmentAvailable.some((e) => e.toLowerCase().includes(searchFilter.toLowerCase()));
+      return matchesCat && matchesSearch;
+    });
+  }, [sportsFacilities, selectedCategory, searchFilter]);
 
   const handleBookSlot = (facilityId: string, facilityName: string, slotTime: string) => {
     const success = bookCourtSlot(facilityId, slotTime);
