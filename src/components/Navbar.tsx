@@ -173,18 +173,6 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
             </button>
 
             <button
-              onClick={() => handleNavClick('marketplace')}
-              className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
-                activeTab === 'marketplace'
-                  ? 'bg-teal-500 text-slate-950 font-extrabold shadow-md shadow-teal-500/20 scale-[1.02]'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.06]'
-              }`}
-            >
-              <ShoppingBag className="size-4" />
-              <span>Market</span>
-            </button>
-
-            <button
               onClick={() => handleNavClick('sports')}
               className={`flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'sports'
@@ -409,7 +397,6 @@ export function Navbar({ onOpenSearch, onOpenEmergency, onOpenTestModal }: Navba
                 { id: 'today', label: 'Dashboard', icon: LayoutDashboard },
                 { id: 'events', label: 'Events & Fests', icon: Calendar },
                 { id: 'circles', label: 'Student Circles', icon: Gamepad2 },
-                { id: 'marketplace', label: 'Marketplace', icon: ShoppingBag },
                 { id: 'sports', label: 'Sports Hub', icon: Trophy },
                 { id: 'notices', label: 'Circulars', icon: Bell },
                 { id: 'admin', label: 'Admin Portal', icon: ShieldCheck },

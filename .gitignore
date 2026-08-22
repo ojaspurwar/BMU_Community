@@ -47,3 +47,7 @@ Thumbs.db
 
 # Temporary extraction folder
 BMU_Community-main/
+node-v22.14.0-linux-x64/
+node.tar.xz
+videos/
+renders/

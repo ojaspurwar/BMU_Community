@@ -21,7 +21,6 @@ interface GlobalSearchModalProps {
 export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
   const {
     events,
-    marketplaceItems,
     sportsFacilities,
     sportsMatches,
     notices,
@@ -54,15 +53,6 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
       )
     : [];
 
-  const matchedItems = query.trim()
-    ? marketplaceItems.filter(
-        (i) =>
-          i.title.toLowerCase().includes(query.toLowerCase()) ||
-          i.category.toLowerCase().includes(query.toLowerCase()) ||
-          (i.skillOffer && i.skillOffer.toLowerCase().includes(query.toLowerCase())) ||
-          (i.skillRequest && i.skillRequest.toLowerCase().includes(query.toLowerCase()))
-      )
-    : [];
 
   const matchedSports = query.trim()
     ? [
@@ -92,7 +82,6 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
 
   const hasMatches =
     matchedEvents.length > 0 ||
-    matchedItems.length > 0 ||
     matchedSports.length > 0 ||
     matchedNotices.length > 0;
 
@@ -134,7 +123,7 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
 
           {query.trim() && !hasMatches && (
             <div className="py-8 text-center text-xs text-slate-500">
-              No results found across BMU events, marketplace, sports, or circulars for "{query}".
+              No results found across BMU events, sports, or circulars for "{query}".
             </div>
           )}
 
@@ -167,32 +156,6 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
           )}
 
           {/* Marketplace Matches */}
-          {matchedItems.length > 0 && (
-            <div className="space-y-1.5">
-              <div className="text-[10px] font-black uppercase tracking-wider text-emerald-400 flex items-center space-x-1.5 px-2">
-                <ShoppingBag className="w-3 h-3" />
-                <span>Skill Swaps & Gear ({matchedItems.length})</span>
-              </div>
-              {matchedItems.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => {
-                    setActiveTab('marketplace');
-                    onClose();
-                  }}
-                  className="p-3 bg-slate-950/80 hover:bg-slate-900 rounded-2xl border border-slate-800/80 hover:border-emerald-500/40 cursor-pointer flex items-center justify-between transition-colors"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-slate-200">{item.title}</div>
-                    <div className="text-[11px] text-slate-400">
-                      {item.category} • {item.type === 'Swap' ? 'Skill Trade' : `₹${item.price}`} • {item.sellerHostel}
-                    </div>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-slate-500" />
-                </div>
-              ))}
-            </div>
-          )}
 
           {/* Sports Matches */}
           {matchedSports.length > 0 && (

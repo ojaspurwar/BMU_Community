@@ -6,7 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { EventModule } from '@/components/EventModule';
 import { StudentCirclesModule } from '@/components/StudentCirclesModule';
 import { AdminPortalModule } from '@/components/AdminPortalModule';
-import { MarketplaceModule } from '@/components/MarketplaceModule';
+
 import { SportsModule } from '@/components/SportsModule';
 import { NoticeStreamModule } from '@/components/NoticeStreamModule';
 import { ProfileModal } from '@/components/ProfileModal';
@@ -36,6 +36,14 @@ import {
   Activity,
   Gamepad2,
   ShieldCheck,
+  User,
+  GraduationCap,
+  Home,
+  Shield,
+  Fingerprint,
+  BookOpen,
+  Coffee,
+  MessageSquare,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CampusNotice } from '@/types';
@@ -131,8 +139,28 @@ export default function HomePage() {
                 </h1>
 
                 <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
-                  Your unified real-time campus telemetry is active. HackBMU 7.0 flagship sprint, live arena matches, and verified CoE circulars are running live.
+                  Your unified real-time campus telemetry is active. Live event radar, active sports matches, and verified academic circulars are syncing.
                 </p>
+
+                {/* Secure Cyber-Identity Tags */}
+                <div className="flex flex-wrap items-center gap-2.5 pt-2">
+                  <div className="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50 text-xs font-bold text-slate-300 shadow-sm">
+                    <Fingerprint className="size-3.5 text-teal-400" />
+                    <span>ID: {currentUser.rollNo}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50 text-xs font-bold text-slate-300 shadow-sm">
+                    <GraduationCap className="size-3.5 text-sky-400" />
+                    <span>{currentUser.department} • {currentUser.year}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50 text-xs font-bold text-slate-300 shadow-sm">
+                    <Home className="size-3.5 text-rose-400" />
+                    <span>{currentUser.hostel} • Rm {currentUser.roomNo}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50 text-xs font-bold text-slate-300 shadow-sm capitalize">
+                    <Shield className="size-3.5 text-emerald-400" />
+                    <span>{currentUser.role?.replace('_', ' ') || 'Student'}</span>
+                  </div>
+                </div>
               </div>
 
               {/* 4 Spacious Floating Telemetry Cards */}
@@ -163,289 +191,63 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Spacious 3-Column Organized Grid */}
-            <div className="grid gap-6 lg:gap-8 lg:grid-cols-3 items-start">
-              
-              {/* Column 1: Upcoming Events & Hackathons */}
-              <section className="space-y-4 animate-smooth-in stagger-1">
-                <div className="flex items-center justify-between pb-1">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20">
-                      <Calendar className="size-4" />
-                    </div>
+            {/* NEW: Minimal "Today at a Glance" detailing below the banner */}
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-smooth-in" style={{ animationDelay: '0.1s' }}>
+              <div className="glass-panel p-5 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <GraduationCap className="size-20" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-white flex items-center gap-2">
+                  <div className="size-2 bg-teal-400 rounded-full" />
+                  Your Classes
+                </h3>
+                <p className="text-sm text-slate-400 mt-1 mb-4">Upcoming schedule for today.</p>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800/40 border border-slate-700/30">
                     <div>
-                      <h2 className="font-display text-base font-bold text-white">Campus Events</h2>
-                      <p className="text-xs text-slate-400">Upcoming fests & workshops</p>
+                      <div className="text-sm font-bold text-white">Data Structures</div>
+                      <div className="text-xs text-slate-400">Prof. Sharma • Gateway Room 12</div>
                     </div>
+                    <div className="text-xs font-mono-bmu text-teal-400 bg-teal-400/10 px-2 py-1 rounded">10:00 AM</div>
                   </div>
-                  <button
-                    onClick={() => setActiveTab('events')}
-                    className="text-xs font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1 glass-pill px-3 py-1.5 rounded-xl transition-all"
-                  >
-                    <span>View all ({events.length})</span>
-                    <ChevronRight className="size-3.5" />
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800/40 border border-slate-700/30">
+                    <div>
+                      <div className="text-sm font-bold text-white">OS Internals</div>
+                      <div className="text-xs text-slate-400">Dr. Verma • Lab 3</div>
+                    </div>
+                    <div className="text-xs font-mono-bmu text-slate-400 bg-slate-400/10 px-2 py-1 rounded">01:30 PM</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass-panel p-5 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Activity className="size-20" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-white flex items-center gap-2">
+                  <div className="size-2 bg-sky-400 rounded-full" />
+                  Quick Tools
+                </h3>
+                <p className="text-sm text-slate-400 mt-1 mb-4">Fast access to campus resources.</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <button className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-slate-800/40 border border-slate-700/30 hover:bg-slate-700/50 hover:border-sky-500/30 transition-all text-slate-300 hover:text-white">
+                    <BookOpen className="size-5 text-sky-400" />
+                    <span className="text-xs font-semibold">Library</span>
+                  </button>
+                  <button className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-slate-800/40 border border-slate-700/30 hover:bg-slate-700/50 hover:border-sky-500/30 transition-all text-slate-300 hover:text-white">
+                    <Coffee className="size-5 text-amber-400" />
+                    <span className="text-xs font-semibold">Cafeteria Menu</span>
+                  </button>
+                  <button className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-slate-800/40 border border-slate-700/30 hover:bg-slate-700/50 hover:border-sky-500/30 transition-all text-slate-300 hover:text-white">
+                    <Calendar className="size-5 text-purple-400" />
+                    <span className="text-xs font-semibold">Academic Cal</span>
+                  </button>
+                  <button className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-slate-800/40 border border-slate-700/30 hover:bg-slate-700/50 hover:border-sky-500/30 transition-all text-slate-300 hover:text-white">
+                    <MessageSquare className="size-5 text-rose-400" />
+                    <span className="text-xs font-semibold">IT Helpdesk</span>
                   </button>
                 </div>
-
-                <div className="space-y-3.5">
-                  {events.slice(0, 3).map((event) => {
-                    const isRegistered = event.rsvpUsers.includes(currentUser.id);
-                    return (
-                      <div
-                        key={event.id}
-                        onClick={() => setActiveTab('events')}
-                        className="glass-card-luxury p-5 flex flex-col justify-between cursor-pointer group hover:border-teal-500/50"
-                      >
-                        <div className="space-y-2.5">
-                          <div className="flex items-center justify-between text-xs font-mono-bmu font-bold uppercase tracking-wider text-slate-400">
-                            <span className="text-teal-400 bg-teal-500/10 px-2.5 py-0.5 rounded-lg border border-teal-500/20">
-                              {event.category}
-                            </span>
-                            <span className="text-slate-400">{event.date}</span>
-                          </div>
-
-                          <h3 className="font-display font-bold text-base text-white group-hover:text-teal-300 transition-colors line-clamp-1">
-                            {event.title}
-                          </h3>
-
-                          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300 pt-0.5">
-                            <span className="flex items-center gap-1.5">
-                              <Clock className="size-3.5 text-sky-400" />
-                              {event.startTime}
-                            </span>
-                            <span className="flex items-center gap-1.5 truncate max-w-[150px]">
-                              <MapPin className="size-3.5 text-rose-400 shrink-0" />
-                              <span className="truncate">{event.venue.split('(')[0]}</span>
-                            </span>
-                            <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                              <Users className="size-3.5" />
-                              {event.rsvpCount} Going
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="mt-4 pt-3.5 border-t border-white/[0.08] flex items-center justify-between gap-3">
-                          <span className="text-xs text-slate-400 truncate max-w-[160px]">
-                            {event.organizer}
-                          </span>
-                          <button
-                            onClick={(e) => handleHomeRSVP(e, event.id)}
-                            className={`btn-spacious text-xs ${
-                              isRegistered
-                                ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40 font-bold'
-                                : 'btn-teal'
-                            }`}
-                          >
-                            {isRegistered ? <><Check className="size-3.5" /> Attending</> : 'RSVP'}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-
-              {/* Column 2: Live Sports & Turf Radar */}
-              <section className="space-y-4 animate-smooth-in stagger-2">
-                <div className="flex items-center justify-between pb-1">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/20">
-                      <Trophy className="size-4" />
-                    </div>
-                    <div>
-                      <h2 className="font-display text-base font-bold text-white">Sports & Arena</h2>
-                      <p className="text-xs text-slate-400">Live matches & court booking</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setActiveTab('sports')}
-                    className="text-xs font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1 glass-pill px-3 py-1.5 rounded-xl transition-all"
-                  >
-                    <span>Courts</span>
-                    <ChevronRight className="size-3.5" />
-                  </button>
-                </div>
-
-                <div className="space-y-3.5">
-                  {/* Live Match Card */}
-                  <div className="glass-card-luxury p-5 space-y-4 hover:border-orange-500/50">
-                    <div className="flex items-center justify-between text-xs font-mono-bmu font-bold uppercase tracking-wider pb-2.5 border-b border-white/[0.08]">
-                      <span className="flex items-center gap-2 text-rose-400">
-                        <span className="size-2 rounded-full bg-rose-500 animate-ping" />
-                        Live on Turf 1
-                      </span>
-                      <span className="text-xs bg-rose-500/10 text-rose-400 border border-rose-500/30 px-2 py-0.5 rounded-md flex items-center gap-1 font-mono">
-                        <Radio className="size-3.5 animate-pulse" />
-                        LIVE
-                      </span>
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.03]">
-                        <div className="flex items-center gap-2.5">
-                          <span className="grid size-7 place-items-center rounded-lg bg-teal-500/20 text-teal-300 font-display text-xs font-bold">
-                            {liveMatch && liveMatch.teamA?.name ? liveMatch.teamA.name.slice(0, 2).toUpperCase() : 'H2'}
-                          </span>
-                          <div>
-                            <div className="font-bold text-sm text-white">
-                              {liveMatch?.teamA?.name || 'Radhakrishnan H2'}
-                            </div>
-                            <div className="text-[10px] text-slate-400">{liveMatch?.teamA?.hostel}</div>
-                          </div>
-                        </div>
-                        <span className="font-mono-bmu text-base font-black text-teal-400">
-                          {liveMatch?.teamA?.score || '142 / 3'}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.03]">
-                        <div className="flex items-center gap-2.5">
-                          <span className="grid size-7 place-items-center rounded-lg bg-slate-800 text-slate-400 font-display text-xs font-bold">
-                            {liveMatch && liveMatch.teamB?.name ? liveMatch.teamB.name.slice(0, 2).toUpperCase() : 'H1'}
-                          </span>
-                          <div>
-                            <div className="font-bold text-sm text-slate-200">
-                              {liveMatch?.teamB?.name || 'Ramanujan H1'}
-                            </div>
-                            <div className="text-[10px] text-slate-400">{liveMatch?.teamB?.hostel}</div>
-                          </div>
-                        </div>
-                        <span className="font-mono-bmu text-base font-black text-slate-400">
-                          {liveMatch?.teamB?.score || 'Yet to Bat'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Open Facility Turf Slots */}
-                  <div className="glass-card-luxury p-5 space-y-3">
-                    <div className="text-xs font-mono-bmu font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                      <span>Available Arena Courts</span>
-                      <span className="text-teal-400">Instant Booking</span>
-                    </div>
-
-                    <div className="space-y-2">
-                      {sportsFacilities.slice(0, 3).map((fac) => {
-                        const availableSlot = fac.slots?.find((s) => s.status === 'available')?.time || '07:00 PM';
-                        return (
-                          <div
-                            key={fac.id}
-                            onClick={() => setActiveTab('sports')}
-                            className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] transition-all cursor-pointer text-xs"
-                          >
-                            <div className="flex items-center gap-2.5 truncate">
-                              <Dumbbell className="size-4 text-teal-400 shrink-0" />
-                              <div>
-                                <div className="font-bold text-slate-200 truncate">{fac.name}</div>
-                                <div className="text-[10px] text-slate-400 truncate">{fac.location}</div>
-                              </div>
-                            </div>
-                            <span className="text-teal-400 font-mono-bmu font-bold shrink-0 ml-2 bg-teal-500/10 px-2 py-1 rounded-lg border border-teal-500/20">
-                              Slot: {availableSlot}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Column 3: Circulars & Quick Shortcuts */}
-              <section className="space-y-4 animate-smooth-in stagger-3">
-                <div className="flex items-center justify-between pb-1">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                      <Bell className="size-4" />
-                    </div>
-                    <div>
-                      <h2 className="font-display text-base font-bold text-white">Notices & Actions</h2>
-                      <p className="text-xs text-slate-400">Official circulars & shortcuts</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setActiveTab('notices')}
-                    className="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 glass-pill px-3 py-1.5 rounded-xl transition-all"
-                  >
-                    <span>All ({notices.length})</span>
-                    <ChevronRight className="size-3.5" />
-                  </button>
-                </div>
-
-                <div className="space-y-3.5">
-                  {/* Official Notices */}
-                  <div className="space-y-2.5">
-                    {notices.slice(0, 3).map((notice) => {
-                      const hasPdf = notice.attachments?.some((a) => a.type === 'PDF');
-                      return (
-                        <div
-                          key={notice.id}
-                          onClick={() => setSelectedNotice(notice)}
-                          className="glass-card-luxury p-4 flex items-center justify-between gap-3 cursor-pointer group hover:border-sky-500/50"
-                        >
-                          <div className="min-w-0 space-y-1">
-                            <div className="flex items-center gap-2 text-[10px] font-mono-bmu uppercase font-bold text-slate-400">
-                              <span className="text-sky-400">{notice.category.split('&')[0]}</span>
-                              <span>•</span>
-                              <span className="truncate">{notice.issuer}</span>
-                            </div>
-                            <div className="font-display text-sm font-bold text-white truncate group-hover:text-sky-300 transition-colors">
-                              {notice.title}
-                            </div>
-                          </div>
-                          {hasPdf && (
-                            <span className="text-[10px] font-mono bg-blue-500/20 text-sky-300 px-2 py-1 rounded-lg border border-blue-500/30 shrink-0 font-bold">
-                              PDF
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Spacious Quick Shortcuts */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                    <div
-                      onClick={() => setActiveTab('circles')}
-                      className="glass-card-luxury p-3.5 flex flex-col justify-between cursor-pointer group hover:border-sky-500/50"
-                    >
-                      <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 w-fit border border-sky-500/20 mb-2">
-                        <Gamepad2 className="size-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-sm text-white group-hover:text-sky-300 transition-colors">Student Circles</div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">Games, jams & groups</div>
-                      </div>
-                    </div>
-
-                    <div
-                      onClick={() => setActiveTab('marketplace')}
-                      className="glass-card-luxury p-3.5 flex flex-col justify-between cursor-pointer group hover:border-emerald-500/50"
-                    >
-                      <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 w-fit border border-emerald-500/20 mb-2">
-                        <ShoppingBag className="size-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-sm text-white group-hover:text-emerald-300 transition-colors">Marketplace</div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">Peer trade & swaps</div>
-                      </div>
-                    </div>
-
-                    <div
-                      onClick={() => setIsAIAssistantOpen(true)}
-                      className="glass-card-luxury p-3.5 flex flex-col justify-between cursor-pointer group hover:border-teal-500/50"
-                    >
-                      <div className="p-2 rounded-xl bg-teal-500/10 text-teal-400 w-fit border border-teal-500/20 mb-2">
-                        <Sparkles className="size-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-sm text-white group-hover:text-teal-300 transition-colors">Ask Pulse AI</div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">AnyModel AI Agent</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+              </div>
             </div>
           </div>
         )}
@@ -465,15 +267,6 @@ export default function HomePage() {
         {activeTab === 'circles' && (
           <div className="animate-smooth-in">
             <StudentCirclesModule />
-          </div>
-        )}
-
-        {/* ======================================================== */}
-        {/* TAB 4: MARKETPLACE & SKILLS */}
-        {/* ======================================================== */}
-        {activeTab === 'marketplace' && (
-          <div className="animate-smooth-in">
-            <MarketplaceModule />
           </div>
         )}
 

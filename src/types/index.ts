@@ -23,7 +23,7 @@ export interface UserProfile {
   sportsPlayed?: string[];
 }
 
-export type ActiveNavTab = 'today' | 'events' | 'circles' | 'marketplace' | 'sports' | 'notices' | 'admin';
+export type ActiveNavTab = 'today' | 'events' | 'circles' | 'sports' | 'notices' | 'admin';
 
 // --- STUDENT CIRCLES & COMMUNITY MEETUPS (SMALL EVENTS, GAMES, STUDY GROUPS) ---
 export type StudentCircleCategory = 'Gaming' | 'Study Jam' | 'Mini-Event' | 'Hangout' | 'Club Group';
